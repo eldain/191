@@ -5,8 +5,8 @@
 <style>
 .line {
   fill: none;
-  stroke: #000;
-  stroke-width: 1.5px;
+  stroke: seagreen;
+  stroke-width: 4px;
 }
 </style>
 <svg width="960" height="500"></svg>

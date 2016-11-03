@@ -71,7 +71,7 @@ function chart(domain, interpolation, tick) {
 }
 
 </script>
-	
+
 <p><b>interpolate the transform</b></p>
 
 <script>(function() {
@@ -221,27 +221,13 @@ d3.select(window)
 
 <p>Notice that the exiting tick marks smoothly fade-out, while the entering tick marks smoothly fade-in; this is handled automatically by the axis component. The process for transitioning the axis is the same as for the transform: update the scale’s domain, then apply linear easing.
 
-<p>Questions or comments? These examples are available as <a href="https://gist.github.com/1642874">GitHub gists</a>. Find me on <a href="http://twitter.com/mbostock">Twitter</a> or stop by the <a href="https://groups.google.com/group/d3-js">d3-js group</a>.
+<p>Random Text for better scrolling</p>
+<p>Random Text for better scrolling</p>
+<p>Random Text for better scrolling</p>
+<p>Random Text for better scrolling</p>
+<p>Random Text for better scrolling</p>
+<p>Random Text for better scrolling</p>
+<p>Random Text for better scrolling</p>
+<p>Random Text for better scrolling</p>
 
-<p>Random Text for better scrolling</p>
-<p>Random Text for better scrolling</p>
-<p>Random Text for better scrolling</p>
-<p>Random Text for better scrolling</p>
-<p>Random Text for better scrolling</p>
-<p>Random Text for better scrolling</p>
-<p>Random Text for better scrolling</p>
-<p>Random Text for better scrolling</p>
-<footer>
-  <aside>January 19, 2012</aside>
-  <a href="../" rel="author">Mike Bostock</a>
-</footer>
-
-<script>
-
-GoogleAnalyticsObject = "ga", ga = function() { ga.q.push(arguments); }, ga.q = [], ga.l = +new Date;
-ga("create", "UA-48272912-3", "ocks.org");
-ga("send", "pageview");
-
-</script>
 <script async src="../highlight.min.js"></script>
-<script async src="//www.google-analytics.com/analytics.js"></script>

@@ -34,3 +34,7 @@ Route::get('/graph', function () {
 Route::get('/graph2', function () {
     return View('graph2');
 });
+
+Route::get('/home', function() {
+  return View('home');
+});
