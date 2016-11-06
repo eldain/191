@@ -38,3 +38,8 @@ Route::get('/graph2', function () {
 Route::get('/home', function() {
   return View('home');
 });
+
+Route::get('/login', function() {
+  return View('login');
+});
+
