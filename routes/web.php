@@ -35,11 +35,10 @@ Route::get('/graph2', function () {
     return View('graph2');
 });
 
-Route::get('/home', function() {
-  return View('home');
+Route::get('/dashboard', function() {
+  return View('dashboard');
 });
 
 Route::get('/login', function() {
   return View('login');
 });
-
