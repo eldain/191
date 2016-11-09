@@ -9,13 +9,23 @@
 
         // Facebook
         echo "<h1>Facebook</h1>";
-        use Facebook\FacebookSession;
+
+        $fbApp = new Facebook\FacebookApp('1675423156013517', 'e336cc48fe592916c5968024714d7a89');
         
         $fb = new Facebook\Facebook([
-        	'app_id' => '{app-id}',
-        	'app_secret' => '{app-secret}',
+        	'app_id' => '1675423156013517',
+        	'app_secret' => 'e336cc48fe592916c5968024714d7a89',
         	'default_graph_version' => 'v2.5',
         	]);
+        /* make the API call */
+
+        $request = new Facebook\FacebookRequest(
+          $fbApp,
+          'GET',
+          '/53663958923'
+        );
+        //$response = $request->execute();
+        //$graphObject = $response->getGraphObject();
 
         // Twitter
         echo "<h1>Twitter</h1>";
