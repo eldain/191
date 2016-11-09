@@ -10,6 +10,7 @@
 
         // Facebook
         echo "<h1>Facebook</h1>";
+        echo "Page Example<br>";
 
         $fb = new Facebook\Facebook([
             'app_id' => '1675423156013517',
@@ -32,6 +33,26 @@
           // When validation fails or other local issues
           echo 'Facebook SDK returned an error: ' . $e->getMessage();
         }
+
+        $helper = $fb->getRedirectLoginHelper();
+
+        $permissions = ['email']; // Optional permissions
+        $loginUrl = $helper->getLoginUrl('https://example.com/fb-callback.php', $permissions);
+
+        echo "<br><br>User Example, URL note defined so wont work";
+        echo '<br><a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
+
+         // Instagram
+        echo "<h1>Instagram</h1>";
+        use MetzWeb\Instagram\Instagram;
+
+        $instagram = new Instagram(array(
+            'apiKey'      => 'feac92c4402246d1b3aa77001c72e574',
+            'apiSecret'   => 'd87070d9f2aa432e845434c908d367dd',
+            'apiCallback' => 'http://www.ics.uci.edu/~lraus/'
+        ));
+
+        echo "<a href='{$instagram->getLoginUrl()}'>Login with Instagram</a>";
 
         // Twitter
         echo "<h1>Twitter</h1>";
