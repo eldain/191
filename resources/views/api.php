@@ -7,25 +7,31 @@
         <?php
         require_once __DIR__ . '/../../vendor/autoload.php';
 
+
         // Facebook
         echo "<h1>Facebook</h1>";
 
-        $fbApp = new Facebook\FacebookApp('1675423156013517', 'e336cc48fe592916c5968024714d7a89');
-        
         $fb = new Facebook\Facebook([
-        	'app_id' => '1675423156013517',
-        	'app_secret' => 'e336cc48fe592916c5968024714d7a89',
-        	'default_graph_version' => 'v2.5',
-        	]);
-        /* make the API call */
+            'app_id' => '1675423156013517',
+            'app_secret' => 'e336cc48fe592916c5968024714d7a89',
+            'default_graph_version' => 'v2.8',
+            ]);
+        $request = $fb->request('GET', '/196346717485902');
+        // $access_token = $fb->getAccessToken();
+        $request->setAccessToken('EAAXzydoQCc0BAJbmpPN3JM5QKQkkLcOLH1ejZABVpakox1N69nXeHdrETtFUfwXfhdNJ226B4WdVAkZBKlEhyPOtvZCkwMuDjTyJga0mWTEE5d8YwoYYzE42SDqlB1jDJuYpItf3QJoSlbivfDFSVzOfXYKQZAKmuYSnMYag5gZDZD');
 
-        $request = new Facebook\FacebookRequest(
-          $fbApp,
-          'GET',
-          '/53663958923'
-        );
-        //$response = $request->execute();
-        //$graphObject = $response->getGraphObject();
+        // Send the request to Graph
+        try {
+          $response = $fb->getClient()->sendRequest($request);
+          $graphNode = $response->getGraphNode();
+          echo 'User name: ' . $graphNode['name'];
+        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+          // When Graph returns an error
+          echo 'Graph returned an error: ' . $e->getMessage();
+        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+          // When validation fails or other local issues
+          echo 'Facebook SDK returned an error: ' . $e->getMessage();
+        }
 
         // Twitter
         echo "<h1>Twitter</h1>";
