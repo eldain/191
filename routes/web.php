@@ -27,6 +27,11 @@ Route::get('/greeting', function()
     return View::make('greeting', array('name' => $user->name));
 });
 
+Route::get('/api', function()
+{
+	return View('api');
+});
+
 Route::get('/graph', function () {
     return View('graph');
 });
