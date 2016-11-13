@@ -10,9 +10,9 @@
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 	<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
 		<div class="mdl-layout__header-row">
-			<span class="mdl-layout-title">Home</span>
+			<span class="mdl-layout-title">Observation Deck</span>
 			<div class="mdl-layout-spacer"></div>
-			<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable" style="margin-top: -32px;">
 				<label class="mdl-button mdl-js-button mdl-button--icon" for="search">
 					<i class="material-icons">search</i>
 				</label>
@@ -33,9 +33,8 @@
 	</header>
 	<div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
 		<header class="demo-drawer-header">
-			<img src="images/user.jpg" class="demo-avatar">
 			<div class="demo-avatar-dropdown">
-				<span>hello@example.com</span>
+				<span>TeraKeen</span>
 				<div class="mdl-layout-spacer"></div>
 				<button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
 					<i class="material-icons" role="presentation">arrow_drop_down</i>
