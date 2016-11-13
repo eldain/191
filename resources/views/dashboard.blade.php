@@ -12,7 +12,7 @@
 		<div class="mdl-layout__header-row">
 			<span class="mdl-layout-title">Observation Deck</span>
 			<div class="mdl-layout-spacer"></div>
-			<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable" style="margin-top: -32px;">
+			<!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable" style="margin-top: -32px;">
 				<label class="mdl-button mdl-js-button mdl-button--icon" for="search">
 					<i class="material-icons">search</i>
 				</label>
@@ -20,7 +20,7 @@
 					<input class="mdl-textfield__input" type="text" id="search">
 					<label class="mdl-textfield__label" for="search">Enter your query...</label>
 				</div>
-			</div>
+			</div> -->
 			<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
 				<i class="material-icons">more_vert</i>
 			</button>
@@ -92,13 +92,13 @@
 			<div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
 				<div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
 					<div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
-						<h2 class="mdl-card__title-text">Updates</h2>
+						<h2 class="mdl-card__title-text">Twitter Updates</h2>
 					</div>
 					<div class="mdl-card__supporting-text mdl-color-text--grey-600">
-						Non dolore elit adipisicing ea reprehenderit consectetur culpa.
+						Let's put some API generated text here!
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
-						<a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
+						<a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">More Details</a>
 					</div>
 				</div>
 				<div class="demo-separator mdl-cell--1-col"></div>
