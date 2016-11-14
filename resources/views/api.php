@@ -55,16 +55,17 @@
         echo "<a href='{$instagram->getLoginUrl()}'>Login with Instagram</a>";
 
         // Twitter
+        // TODO CREATE A TWITTER CLASS
         echo "<h1>Twitter</h1>";
-        echo "<h3>List of @Gigasavvy followers</h3>";
+        echo "<h3>Latest @Gigasavvy Timeline</h3>";
         $settings = array(
             'oauth_access_token' => "4775133980-wGivgWH5O91qrdoo9oBVJio4uwUgfQ9baSk2U6s",
             'oauth_access_token_secret' => "Gq3MBg5I7erXfQbYOTGD8G7VugaeVMTwecpuO1X3tvcdk",
             'consumer_key' => "HqSjdxilaF7ogzd6ldpbS6DoA",
             'consumer_secret' => "xRsiyK1v7aylulNDVPqUxrBFBWq3tDqjkIfGfcPbkXnSUmQVj0"
             );
-        $url = 'https://api.twitter.com/1.1/followers/list.json';
-        $getfield = '?screen_name=Gigasavvy';
+        $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+        $getfield = '?screen_name=Gigasavvy&count=1';
         $requestMethod = 'GET';
 
         $twitter = new TwitterAPIExchange($settings);
@@ -73,6 +74,8 @@
             ->performRequest();
 
 
+        // $json_a=json_decode($response,true);
+        // $tweet = $json_a[0]['text'];
         echo $response;
         ?>
 

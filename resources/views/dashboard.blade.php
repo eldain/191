@@ -95,7 +95,28 @@
 						<h2 class="mdl-card__title-text">Twitter Updates</h2>
 					</div>
 					<div class="mdl-card__supporting-text mdl-color-text--grey-600">
-						Let's put some API generated text here!
+						<?php
+						// TODO CREATE A TWITTER CLASS
+						$settings = array(
+				            'oauth_access_token' => "4775133980-wGivgWH5O91qrdoo9oBVJio4uwUgfQ9baSk2U6s",
+				            'oauth_access_token_secret' => "Gq3MBg5I7erXfQbYOTGD8G7VugaeVMTwecpuO1X3tvcdk",
+				            'consumer_key' => "HqSjdxilaF7ogzd6ldpbS6DoA",
+				            'consumer_secret' => "xRsiyK1v7aylulNDVPqUxrBFBWq3tDqjkIfGfcPbkXnSUmQVj0"
+				            );
+				        $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+				        $getfield = '?screen_name=Gigasavvy&count=1';
+				        $requestMethod = 'GET';
+
+				        $twitter = new TwitterAPIExchange($settings);
+				        $response = $twitter->setGetfield($getfield)
+				            ->buildOauth($url, $requestMethod)
+				            ->performRequest();
+
+
+				        $json_a=json_decode($response,true);
+				        $tweet = $json_a[0]['text'];
+				        echo $tweet;
+						?>
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
 						<a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">More Details</a>
