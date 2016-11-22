@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+/* Uncomment line below for layout debugging help */
+/**{
+  outline: 1px solid gold;
+}*/
+
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
