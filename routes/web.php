@@ -44,6 +44,18 @@ Route::get('/dashboard', function() {
   return View('dashboard');
 });
 
+Route::get('/facebook', function() {
+  return View('facebook');
+});
+
+Route::get('/instagram', function() {
+  return View('instagram');
+});
+
+Route::get('/twitter', function() {
+  return View('twitter');
+});
+
 Route::get('/login', function() {
   return View('login');
 });
