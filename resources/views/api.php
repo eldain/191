@@ -54,6 +54,25 @@
 
         echo "<a href='{$instagram->getLoginUrl()}'>Login with Instagram</a>";
 
+        // grab OAuth callback code
+        if (isset($_GET['code'])){
+            $code = $_GET['code'];
+            $data = $instagram->getOAuthToken($code);
+
+            echo 'Your username is: ' . $data->user->username;
+
+            // set user access token
+            $instagram->setAccessToken($data);
+
+            // get all user likes
+            $likes = $instagram->getUserLikes();
+
+            // take a look at the API response
+            echo '<pre>';
+            print_r($likes);
+            echo '<pre>';
+        }
+
         // Twitter
         // TODO CREATE A TWITTER CLASS
         echo "<h1>Twitter</h1>";
