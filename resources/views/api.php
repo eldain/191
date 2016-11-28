@@ -12,35 +12,24 @@
         echo "<h1>Facebook</h1>";
         echo "Page Example<br>";
 
+        if(!session_id()) {
+            session_start();
+        }
+
         $fb = new Facebook\Facebook([
             'app_id' => '1675423156013517',
             'app_secret' => 'e336cc48fe592916c5968024714d7a89',
             'default_graph_version' => 'v2.8',
             ]);
-        $request = $fb->request('GET', '/196346717485902');
-        // $access_token = $fb->getAccessToken();
-        $request->setAccessToken('EAAXzydoQCc0BAJbmpPN3JM5QKQkkLcOLH1ejZABVpakox1N69nXeHdrETtFUfwXfhdNJ226B4WdVAkZBKlEhyPOtvZCkwMuDjTyJga0mWTEE5d8YwoYYzE42SDqlB1jDJuYpItf3QJoSlbivfDFSVzOfXYKQZAKmuYSnMYag5gZDZD');
-
-        // Send the request to Graph
-        try {
-          $response = $fb->getClient()->sendRequest($request);
-          $graphNode = $response->getGraphNode();
-          echo 'User name: ' . $graphNode['name'];
-        } catch(Facebook\Exceptions\FacebookResponseException $e) {
-          // When Graph returns an error
-          echo 'Graph returned an error: ' . $e->getMessage();
-        } catch(Facebook\Exceptions\FacebookSDKException $e) {
-          // When validation fails or other local issues
-          echo 'Facebook SDK returned an error: ' . $e->getMessage();
-        }
 
         $helper = $fb->getRedirectLoginHelper();
 
-        $permissions = ['email']; // Optional permissions
-        $loginUrl = $helper->getLoginUrl('https://example.com/fb-callback.php', $permissions);
+        $permissions = ['email', 'manage_pages']; // Optional permissions
+        $loginUrl = $helper->getLoginUrl('http://homestead.app/facebook', $permissions);
 
-        echo "<br><br>User Example, URL note defined so wont work";
+        echo "<br><br>User Example";
         echo '<br><a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
+
 
          // Instagram
         echo "<h1>Instagram</h1>";
@@ -54,24 +43,24 @@
 
         echo "<a href='{$instagram->getLoginUrl()}'>Login with Instagram</a>";
 
-        // grab OAuth callback code
-        if (isset($_GET['code'])){
-            $code = $_GET['code'];
-            $data = $instagram->getOAuthToken($code);
+        // // grab OAuth callback code
+        // if (isset($_GET['code'])){
+        //     $code = $_GET['code'];
+        //     $data = $instagram->getOAuthToken($code);
 
-            echo 'Your username is: ' . $data->user->username;
+        //     echo 'Your username is: ' . $data->user->username;
 
-            // set user access token
-            $instagram->setAccessToken($data);
+        //     // set user access token
+        //     $instagram->setAccessToken($data);
 
-            // get all user likes
-            $likes = $instagram->getUserLikes();
+        //     // get all user likes
+        //     $likes = $instagram->getUserLikes();
 
-            // take a look at the API response
-            echo '<pre>';
-            print_r($likes);
-            echo '<pre>';
-        }
+        //     // take a look at the API response
+        //     echo '<pre>';
+        //     print_r($likes);
+        //     echo '<pre>';
+        // }
 
         // Twitter
         // TODO CREATE A TWITTER CLASS

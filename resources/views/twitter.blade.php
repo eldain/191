@@ -28,6 +28,8 @@
 		$json_a=json_decode($response,true);
 		$tweet = $json_a[0]['text'];
 		echo $tweet;
+		$retweets = $json_a[0]['retweet_count'];
+		echo '<br>Retweet Count = ' . $retweets;
 		?>
 	</div>
 </main>

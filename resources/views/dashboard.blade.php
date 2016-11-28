@@ -50,26 +50,23 @@
 				</div>
 				<div class="mdl-card__supporting-text mdl-color-text--grey-600">
 					<?php
-					// TODO CREATE A TWITTER CLASS
-					$settings = array(
-									'oauth_access_token' => "4775133980-wGivgWH5O91qrdoo9oBVJio4uwUgfQ9baSk2U6s",
-									'oauth_access_token_secret' => "Gq3MBg5I7erXfQbYOTGD8G7VugaeVMTwecpuO1X3tvcdk",
-									'consumer_key' => "HqSjdxilaF7ogzd6ldpbS6DoA",
-									'consumer_secret' => "xRsiyK1v7aylulNDVPqUxrBFBWq3tDqjkIfGfcPbkXnSUmQVj0"
-									);
-							$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-							$getfield = '?screen_name=Gigasavvy&count=1';
-							$requestMethod = 'GET';
+			        if(!session_id()) {
+			            session_start();
+			        }
 
-							$twitter = new TwitterAPIExchange($settings);
-							$response = $twitter->setGetfield($getfield)
-									->buildOauth($url, $requestMethod)
-									->performRequest();
+			        $fb = new Facebook\Facebook([
+			            'app_id' => '1675423156013517',
+			            'app_secret' => 'e336cc48fe592916c5968024714d7a89',
+			            'default_graph_version' => 'v2.8',
+			            ]);
 
+			        $helper = $fb->getRedirectLoginHelper();
 
-							$json_a=json_decode($response,true);
-							$tweet = $json_a[0]['text'];
-							echo $tweet;
+			        $permissions = ['email', 'manage_pages']; // Optional permissions
+			        $loginUrl = $helper->getLoginUrl('https://rtdiprod.herokuapp.com/facebook', $permissions);
+
+			        echo "<br><br>User Example";
+			        echo '<br><a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 					?>
 				</div>
 				<div class="mdl-card__actions mdl-card--border">
