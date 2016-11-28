@@ -49,7 +49,7 @@
         $instagram = new Instagram(array(
             'apiKey'      => 'feac92c4402246d1b3aa77001c72e574',
             'apiSecret'   => 'd87070d9f2aa432e845434c908d367dd',
-            'apiCallback' => 'http://www.ics.uci.edu/~lraus/'
+            'apiCallback' => 'https://rtdiprod.herokuapp.com/api'
         ));
 
         echo "<a href='{$instagram->getLoginUrl()}'>Login with Instagram</a>";
