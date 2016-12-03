@@ -7,79 +7,27 @@
 <main class="mdl-layout__content mdl-color--grey-100">
 	<div class="mdl-grid demo-content">
 		<?php
-		if(!session_id()) {
-			session_start();
-        }
-        $fb = new Facebook\Facebook([
-            'app_id' => '1675423156013517',
-            'app_secret' => 'e336cc48fe592916c5968024714d7a89',
-            'default_graph_version' => 'v2.8',
-            ]);
+	        $appid = '1675423156013517';
+	        $appsecret = 'e336cc48fe592916c5968024714d7a89';
+	      
+			//Get Facebook Likes Count of a page
+			//https://graph.facebook.com/cocacola/?fields=fan_count&access_token=1675423156013517|e336cc48fe592916c5968024714d7a89
+			function fbLikeCount($id,$appid,$appsecret){
+				//Construct a Facebook URL
+				$json_url ='https://graph.facebook.com/'.$id.'/?fields=fan_count&access_token='.$appid.'|'.$appsecret;
+				$json = file_get_contents($json_url);
+				$json_output = json_decode($json);
 
-		$helper = $fb->getRedirectLoginHelper();
-
-		try {
-		  $accessToken = $helper->getAccessToken();
-		} catch(Facebook\Exceptions\FacebookResponseException $e) {
-		  // When Graph returns an error
-		  echo 'Graph returned an error: ' . $e->getMessage();
-		  exit;
-		} catch(Facebook\Exceptions\FacebookSDKException $e) {
-		  // When validation fails or other local issues
-		  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-		  exit;
-		}
-
-		if (! isset($accessToken)) {
-		  if ($helper->getError()) {
-		    header('HTTP/1.0 401 Unauthorized');
-		    echo "Error: " . $helper->getError() . "\n";
-		    echo "Error Code: " . $helper->getErrorCode() . "\n";
-		    echo "Error Reason: " . $helper->getErrorReason() . "\n";
-		    echo "Error Description: " . $helper->getErrorDescription() . "\n";
-		  } else {
-		    header('HTTP/1.0 400 Bad Request');
-		    echo 'Bad request';
-		  }
-		  exit;
-		}
-
-		// Logged in
-		echo '<h3>Access Token</h3>';
-		var_dump($accessToken->getValue());
-
-		// The OAuth 2.0 client handler helps us manage access tokens
-		$oAuth2Client = $fb->getOAuth2Client();
-
-		// Get the access token metadata from /debug_token
-		$tokenMetadata = $oAuth2Client->debugToken($accessToken);
-		echo '<h3>Metadata</h3>';
-		var_dump($tokenMetadata);
-
-		// Validation (these will throw FacebookSDKException's when they fail)
-		$tokenMetadata->validateAppId('1675423156013517'); // Replace {app-id} with your app id
-		// If you know the user ID this access token belongs to, you can validate it here
-		//$tokenMetadata->validateUserId('123');
-		$tokenMetadata->validateExpiration();
-
-		if (! $accessToken->isLongLived()) {
-		  // Exchanges a short-lived access token for a long-lived one
-		  try {
-		    $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
-		  } catch (Facebook\Exceptions\FacebookSDKException $e) {
-		    echo "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
-		    exit;
-		  }
-
-		  echo '<h3>Long-lived</h3>';
-		  var_dump($accessToken->getValue());
-		}
-
-		$_SESSION['fb_access_token'] = (string) $accessToken;
-
-		// User is logged in with a long-lived access token.
-		// You can redirect them to a members-only page.
-		//header('Location: https://example.com/members.php');
+				//Extract the likes count from the JSON object
+				if($json_output->fan_count){
+					return $likes = $json_output->fan_count;
+				}else{
+					return 0;
+				}
+			}
+			//This Will return like count of CoffeeCupWeb Facebook page
+			// access_token=1675423156013517|e336cc48fe592916c5968024714d7a89
+			echo '<h3>GigaSavvy number of likes = ' . fbLikeCount('GigaSavvy',$appid, $appsecret) . '</h3>';
 		?>
 	</div>
 </main>

@@ -6,28 +6,14 @@
 
 <main class="mdl-layout__content mdl-color--grey-100">
 	<div class="mdl-grid demo-content">
-		<h3>Instagram
+		<h3>Instagram</h3>
 		<?php
-		use MetzWeb\Instagram\Instagram;
-
-        $instagram = new Instagram(array(
-            'apiKey'      => 'feac92c4402246d1b3aa77001c72e574',
-            'apiSecret'   => 'd87070d9f2aa432e845434c908d367dd',
-            'apiCallback' => 'https://rtdiprod.herokuapp.com/instagram'
-        ));
-
-        echo "<a href='{$instagram->getLoginUrl()}'>Login with Instagram</a>";
-
-        // grab OAuth callback code
-        if (isset($_GET['code'])){
-            $code = $_GET['code'];
-            $data = $instagram->getOAuthToken($code);
-
-            echo '<br>Your username is: ' . $data->user->username;
-        }
-
-        ?>
-		</h3>
+        $access_token = '220678271.feac92c.647e2f561b594603b48a4696dfbbc3bf';
+        $json_url = "https://api.instagram.com/v1/users/220678271/?access_token=" . $access_token;
+        $json = file_get_contents($json_url);
+        $json_output = json_decode($json);
+        var_dump($json_output);
+        ?>	
 	</div>
 </main>
 
