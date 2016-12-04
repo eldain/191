@@ -1,5 +1,5 @@
 @extends('base')
-@section('title', 'Observation Desk')
+@section('title', 'Observation Deck')
 @section('head')
 	<link rel="stylesheet" href="/css/styles.css" media="screen" title="no title">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
