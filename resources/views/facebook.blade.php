@@ -9,7 +9,7 @@
 		<?php
 			use App\MyFacebookApi;
 			$fb = new MyFacebookApi();
-			echo '<h3>GigaSavvy number of likes = ' . $fb->fbLikeCount('GigaSavvy') . '</h3>';
+			echo '<h3>GigaSavvy number of likes = ' . $fb->fbPageLikeCount('GigaSavvy') . '</h3>';
 		?>
 	</div>
 </main>

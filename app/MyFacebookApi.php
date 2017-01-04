@@ -7,16 +7,17 @@ class MyFacebookApi
 {
     private $appid = '1675423156013517';
     private $appsecret = 'e336cc48fe592916c5968024714d7a89';
+    private $FbGraphHost = 'https://graph.facebook.com/';
 
     /**
      * Get the number of likes on a Facebook page given the page ID.
      *
      * @return String
      */
-    public function fbLikeCount($pageId)
+    public function fbPageLikeCount($pageId)
     {
         //Construct a Facebook URL
-        $json_url ='https://graph.facebook.com/'.$pageId.'/?fields=fan_count&access_token='.$this->appid.'|'.$this->appsecret;
+        $json_url = $this->FbGraphHost . $pageId . '/?fields=fan_count&access_token=' . $this->appid.'|'.$this->appsecret;
         $json = file_get_contents($json_url);
         $json_output = json_decode($json);
 

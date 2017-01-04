@@ -16,7 +16,7 @@
 					<?php
 						use App\MyInstagramApi;
                 		$instagram = new MyInstagramApi();
-                		echo 'theguitarrevolution has ' . $instagram->getFollowersCount('220678271') . ' followers.';
+                		echo 'theguitarrevolution has ' . $instagram->getNumberOfFollowers('220678271') . ' followers.';
 					?>
 				</div>
 				<div class="mdl-card__actions mdl-card--border">
@@ -35,7 +35,7 @@
 					<?php
 						use App\MyFacebookApi;
 						$fb = new MyFacebookApi();
-						echo( 'CocaCola number of likes =' .$fb->fbLikeCount('cocacola'));
+						echo( 'CocaCola number of likes =' .$fb->fbPageLikeCount('cocacola'));
 					?>
 				</div>
 				<div class="mdl-card__actions mdl-card--border">
@@ -54,7 +54,7 @@
 					<?php
 						use App\MyTwitterApi;
 						$twitter = new MyTwitterApi();
-						echo $twitter->getTweet('Gigasavvy');
+						echo $twitter->getLastTweet('Gigasavvy');
 					?>
 				</div>
 				<div class="mdl-card__actions mdl-card--border">

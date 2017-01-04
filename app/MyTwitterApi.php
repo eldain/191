@@ -22,7 +22,7 @@ class MyTwitterApi
      *
      * @return String
      */
-    public function getTweet($twitterUserName)
+    public function getLastTweet($twitterUserName)
     {
         $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
         $getfield = '?screen_name=' . $twitterUserName . '&count=1';
@@ -43,7 +43,7 @@ class MyTwitterApi
      *
      * @return String
      */
-    public function getRetweetCount($twitterUserName)
+    public function getLastRetweetCount($twitterUserName)
     {
         $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
         $getfield = '?screen_name=' . $twitterUserName . '&count=1';
