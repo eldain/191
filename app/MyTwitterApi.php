@@ -59,4 +59,25 @@ class MyTwitterApi
         return $retweets;
     }
 
+    /**
+     * Get the number of followers for a user
+     *
+     * @return String
+     */
+    public function getFollowersCount($twitterUserName)
+    {
+        $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+        $getfield = '?screen_name=' . $twitterUserName . '&count=1';
+        $requestMethod = 'GET';
+
+        $response = $this->twitter->setGetfield($getfield)
+                ->buildOauth($url, $requestMethod)
+                ->performRequest();
+
+
+        $json_a=json_decode($response,true);
+        $retweets = $json_a[0]['user']['followers_count'];
+        return $retweets;
+    }
+
 }
