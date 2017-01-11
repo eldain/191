@@ -12,6 +12,7 @@ class MyTwitterApi
         'consumer_key' => "HqSjdxilaF7ogzd6ldpbS6DoA",
         'consumer_secret' => "xRsiyK1v7aylulNDVPqUxrBFBWq3tDqjkIfGfcPbkXnSUmQVj0");
     private $twitter;
+    private $twitterCountApiKey = '8ebb122d7edc916bfde239331263ca68';
 
     function __construct() {
        $this->twitter = new TwitterAPIExchange($this->settings);
@@ -76,8 +77,32 @@ class MyTwitterApi
 
 
         $json_a=json_decode($response,true);
-        $retweets = $json_a[0]['user']['followers_count'];
-        return $retweets;
+        $followers_count = $json_a[0]['user']['followers_count'];
+        return $followers_count;
+    }
+
+    /**
+     * Get the followers data over time
+     *
+     * @return String
+     */
+    public function getFollowersData($twitterUserName)
+    {
+        $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+        $getfield = '?screen_name=' . $twitterUserName . '&count=1';
+        $requestMethod = 'GET';
+
+        $response = $this->twitter->setGetfield($getfield)
+                ->buildOauth($url, $requestMethod)
+                ->performRequest();
+
+
+        $json_a=json_decode($response,true);
+        $twitter_id = $json_a[0]['user']['id_str'];
+        $twitter_count_url = 'http://api.twittercounter.com/?twitter_id=' . $twitter_id . '&apikey=' . $this->twitterCountApiKey;
+        $json_twitter_count = json_decode(file_get_contents($twitter_count_url), true);
+        $followersperdate_array = $json_twitter_count['followersperdate'];
+        return json_encode($followersperdate_array);
     }
 
 }

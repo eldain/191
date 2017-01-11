@@ -13,6 +13,7 @@
 			echo '<h4>GigaSavvy tweet = ' . $twitter->getLastTweet('Gigasavvy') . '</h4>';
 			echo '<h4>GigaSavvy retweet = ' . $twitter->getLastRetweetCount('Gigasavvy') . '</h4>';
 			echo '<h4>GigaSavvy folowers  = ' . $twitter->getFollowersCount('Gigasavvy') . '</h4>';
+			echo '<h4>GigaSavvy folowers per date = </h4><code>' . $twitter->getFollowersData('Gigasavvy') . '</code>';
 
 		?>
 	</div>
