@@ -12,6 +12,6 @@ Daniel McInnis
 4. cd to the Laravel directory (the one with app,boostrap,config... folders).
 5. Inside your vagrant machine run: `composer install` and then `composer update` to get php depenancies.
 6. Create .env file based on example.env and match it to your local computer (should have done in tutorial but check here too).
-7. Inside your vagrant machine run: `php artisan key::generate` to create your app Key.
+7. Inside your vagrant machine run: `php artisan key:generate` to create your app Key.
 8. Inside your vagrant machine run: `php artisan migrate:refresh --seed` to get your DB up and current.
 
