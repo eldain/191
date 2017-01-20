@@ -16,7 +16,8 @@ class MyInstagramApi
      */
     public function getNumberOfFollowers($InstagramUserId)
     {
-        $json_url = $this->instagramHost . 'users/' . $InstagramUserId . '/?access_token=' . $this->access_token;
+        $json_url = $this->instagramHost . 'users/' . $InstagramUserId 
+        . '/?access_token=' . $this->access_token;
         $json = file_get_contents($json_url);
         $json_output = json_decode($json);
         return $json_output->data->counts->followed_by;

@@ -21,7 +21,9 @@ class MyFacebookApi
     public function fbPageLikeCount($pageId)
     {
         //Construct a Facebook URL
-        $json_url = $this->FbGraphHost . $pageId . '/?fields=fan_count&access_token=' . $this->appid.'|'.$this->appsecret;
+        $json_url = $this->FbGraphHost . $pageId . '/?fields=fan_count&access_token=' 
+        . $this->appid.'|'.$this->appsecret;
+
         $json = file_get_contents($json_url);
         $json_output = json_decode($json);
 
@@ -46,7 +48,9 @@ class MyFacebookApi
     public function fbRecentPost($pageId, $limit)
     {
         //Construct a Facebook URL
-        $json_url = $this->FbGraphHost . $pageId . '/feed/?fields=reactions&limit=' . $limit . '&access_token=' . $this->appid.'|'.$this->appsecret;
+        $json_url = $this->FbGraphHost . $pageId . '/feed/?fields=reactions&limit=' 
+        . $limit . '&access_token=' . $this->appid.'|'.$this->appsecret;
+        
         $json = file_get_contents($json_url);
         //$json_output = json_decode($json);
 

@@ -99,7 +99,9 @@ class MyTwitterApi
 
         $json_a=json_decode($response,true);
         $twitter_id = $json_a[0]['user']['id_str'];
-        $twitter_count_url = 'http://api.twittercounter.com/?twitter_id=' . $twitter_id . '&apikey=' . $this->twitterCountApiKey;
+        $twitter_count_url = 'http://api.twittercounter.com/?twitter_id=' 
+        . $twitter_id . '&apikey=' . $this->twitterCountApiKey;
+        
         $json_twitter_count = json_decode(file_get_contents($twitter_count_url), true);
         $followersperdate_array = $json_twitter_count['followersperdate'];
         return json_encode($followersperdate_array);
