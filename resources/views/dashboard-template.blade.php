@@ -16,7 +16,7 @@
 	</header>
 	<div class="demo-drawer mdl-layout__drawer">
 		<header class="demo-drawer-header">
-			<span>GigaSavvy</span>
+			<span>Observation Deck</span>
 		</header>
 		<nav class="demo-navigation mdl-navigation">
 			<a class="mdl-navigation__link" href="/dashboard"><i class="material-icons" role="presentation">home</i>Dashboard</a>
