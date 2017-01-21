@@ -44,6 +44,10 @@ Route::get('/dashboard', function() {
   return View('dashboard');
 });
 
+Route::get('/settings', function() {
+  return View('settings');
+});
+
 Route::get('/facebook', function() {
   return View('facebook');
 });

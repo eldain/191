@@ -4,7 +4,7 @@
 @section('dashboard-title', 'Facebook Updates')
 @section('dashboard-body')
 
-<main class="mdl-layout__content mdl-color--grey-100">
+<main class="mdl-layout__content content-background">
 	<div class="mdl-grid demo-content">
 		<?php
 			use App\MyFacebookApi;
@@ -13,7 +13,7 @@
 		    echo '<h3> Number of Reactions per post: ' . $fb->getNumberOfReactionsPerPost('GigaSavvy', 5) . '</h3>';
 		    echo '<h3> Number of Comments per post: ' . $fb->getNumberOfCommentsPerPost('GigaSavvy', 5) . '</h3>';
 		?>
-		
+
 	</div>
 </main>
 

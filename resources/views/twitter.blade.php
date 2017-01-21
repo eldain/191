@@ -4,7 +4,7 @@
 @section('dashboard-title', 'Twitter Updates')
 @section('dashboard-body')
 
-<main class="mdl-layout__content mdl-color--grey-100">
+<main class="mdl-layout__content content-background">
 	<div class="mdl-grid demo-content">
 		<h3>Twitter Info goes on this Page</h3>
 		<?php
