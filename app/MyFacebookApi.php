@@ -66,4 +66,34 @@ class MyFacebookApi
 
     }
 
+    /**
+     * Get a list of comments per post in order of most recent.
+     *
+     * URL Called: https://graph.facebook.com/{$pageId}/
+     * feed/?fields=comments.summary(total_count)&limit=2&
+     * access_token={$appid}|{$appsecret}
+     *
+     * @return String
+     */
+    public function getNumberOfCommentsPerPost($pageId, $limit)
+    {
+        //Construct a Facebook URL
+        $json_url = $this->FbGraphHost . $pageId . '/feed/?fields=comments.summary(total_count)&limit=' 
+        . $limit . '&access_token=' . $this->appid.'|'.$this->appsecret;
+
+        $json = file_get_contents($json_url);
+        $json_output = json_decode($json);
+        $total_comments_array = [];
+        if($json_output->data){
+
+            foreach ($json_output->data as $post){
+                $comments_count = $post->comments->summary->total_count;
+                array_push($total_comments_array, $comments_count);
+            }
+
+        }
+        return implode(",", $total_comments_array);
+
+    }
+
 }
