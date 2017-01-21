@@ -9,8 +9,8 @@
 		<?php
 			use App\MyFacebookApi;
 			$fb = new MyFacebookApi();
-			echo '<h3>GigaSavvy number of likes = ' . $fb->fbPageLikeCount('GigaSavvy') . '</h3>';
-		    echo '<code>' . $fb->fbRecentPost('GigaSavvy', 2) . '</code>';
+			echo '<h3>GigaSavvy number of likes = ' . $fb->getPageLikeCount('GigaSavvy') . '</h3>';
+		    echo '<h3> Number of Reactions per post: ' . $fb->getNumberOfReactionsPerPost('GigaSavvy', 5) . '</h3>';
 		?>
 		
 	</div>

@@ -35,7 +35,7 @@
 					<?php
 						use App\MyFacebookApi;
 						$fb = new MyFacebookApi();
-						echo( 'CocaCola number of likes =' .$fb->fbPageLikeCount('cocacola'));
+						echo( 'CocaCola number of likes =' .$fb->getPageLikeCount('cocacola'));
 					?>
 				</div>
 				<div class="mdl-card__actions mdl-card--border">
