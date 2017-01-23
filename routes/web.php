@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 /* (lukeraus) test URL below */
 Route::get('/test', function () {
-	$results = DB::select('select name from users', array(1));
+	$results = DB::select('select * from users', array(1));
     return $results;
 });
 
