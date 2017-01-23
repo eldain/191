@@ -5,7 +5,7 @@
 @section('dashboard-body')
 
 <main class="mdl-layout__content content-background">
-	<div class="mdl-grid demo-content">
+	<div class="mdl-grid demo-content gold">
 	<?php
                 use App\MyInstagramApi;
                 $instagram = new MyInstagramApi();
