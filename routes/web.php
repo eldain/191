@@ -59,52 +59,53 @@ Route::get('/login', function() {
 
 // Custom API's below
 // Facebook
-Route::get('/fbReactionsPerPost', function()
-{
+// Example: http://homestead.app/fbReactionsPerPost/GigaSavvy/5
+Route::get('/fbReactionsPerPost/{user?}/{post_count?}',
+  function($user = 'GigaSavvy', $post_count = 5) {
   $fb = new MyFacebookApi();
-  return $fb->getNumberOfReactionsPerPost('GigaSavvy', 5);
+  return $fb->getNumberOfReactionsPerPost($user, $post_count);
 });
 
-Route::get('/fbCommentsPerPost', function()
-{
+Route::get('/fbCommentsPerPost/{user?}/{post_count?}',
+  function($user = 'GigaSavvy', $post_count = 5) {
   $fb = new MyFacebookApi();
-  return $fb->getNumberOfCommentsPerPost('GigaSavvy', 5);
+  return $fb->getNumberOfCommentsPerPost($user , $post_count);
 });
 
-Route::get('/fbPageLikeCount', function()
+Route::get('/fbPageLikeCount/{user?}', function($user = 'GigaSavvy')
 {
   $fb = new MyFacebookApi();
-  return $fb->getPageLikeCount('GigaSavvy');
+  return $fb->getPageLikeCount($user);
 });
 
 //Twitter
-Route::get('/twLastRetweetCount', function()
+Route::get('/twLastRetweetCount/{user?}', function($user = 'Gigasavvy')
 {
   $twitter = new MyTwitterApi();
-  return $twitter->getLastRetweetCount('Gigasavvy');
+  return $twitter->getLastRetweetCount($user);
 });
 
-Route::get('/twFollowersCount', function()
+Route::get('/twFollowersCount/{user?}', function($user = 'Gigasavvy')
 {
   $twitter = new MyTwitterApi();
-  return $twitter->getFollowersCount('Gigasavvy');
+  return $twitter->getFollowersCount($user);
 });
 
-Route::get('/twFollowersByDay', function()
+Route::get('/twFollowersByDay/{user?}', function($user = 'Gigasavvy')
 {
   $twitter = new MyTwitterApi();
-  return $twitter->getFollowersData('Gigasavvy');
+  return $twitter->getFollowersData($user);
 });
 
-Route::get('/twLastTweet', function()
+Route::get('/twLastTweet/{user?}', function($user = 'Gigasavvy')
 {
   $twitter = new MyTwitterApi();
-  return $twitter->getLastTweet('Gigasavvy');
+  return $twitter->getLastTweet($user);
 });
 
 //Instagram
-Route::get('/InstaNumberOffFollowers', function()
+Route::get('/InstaNumberOffFollowers/{user?}', function($user = '220678271')
 {
   $instagram = new MyInstagramApi();
-  return $instagram->getNumberOfFollowers('220678271');
+  return $instagram->getNumberOfFollowers($user);
 });
