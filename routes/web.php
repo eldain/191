@@ -14,6 +14,7 @@
 // Import Custom Classes
 use App\MyFacebookApi;
 use App\MyTwitterApi;
+use App\MyInstagramApi;
 
 
 Route::get('/', function () {
@@ -99,4 +100,11 @@ Route::get('/twLastTweet', function()
 {
   $twitter = new MyTwitterApi();
   return $twitter->getLastTweet('Gigasavvy');
+});
+
+//Instagram
+Route::get('/InstaNumberOffFollowers', function()
+{
+  $instagram = new MyInstagramApi();
+  return $instagram->getNumberOfFollowers('220678271');
 });
