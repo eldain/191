@@ -13,6 +13,7 @@
 
 // Import Custom Classes
 use App\MyFacebookApi;
+use App\MyTwitterApi;
 
 
 Route::get('/', function () {
@@ -73,4 +74,29 @@ Route::get('/fbPageLikeCount', function()
 {
   $fb = new MyFacebookApi();
   return $fb->getPageLikeCount('GigaSavvy');
+});
+
+//Twitter
+Route::get('/twLastRetweetCount', function()
+{
+  $twitter = new MyTwitterApi();
+  return $twitter->getLastRetweetCount('Gigasavvy');
+});
+
+Route::get('/twFollowersCount', function()
+{
+  $twitter = new MyTwitterApi();
+  return $twitter->getFollowersCount('Gigasavvy');
+});
+
+Route::get('/twFollowersByDay', function()
+{
+  $twitter = new MyTwitterApi();
+  return $twitter->getFollowersData('Gigasavvy');
+});
+
+Route::get('/twLastTweet', function()
+{
+  $twitter = new MyTwitterApi();
+  return $twitter->getLastTweet('Gigasavvy');
 });
