@@ -11,6 +11,10 @@
 |
 */
 
+// Import Custom Classes
+use App\MyFacebookApi;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -24,20 +28,7 @@ Route::get('/test', function () {
 Route::get('/greeting', function()
 {
 	$user = DB::table('users')->where('name', 'luke')->first();
-    return View::make('greeting', array('name' => $user->name));
-});
-
-Route::get('/api', function()
-{
-	return View('api');
-});
-
-Route::get('/graph', function () {
-    return View('graph');
-});
-
-Route::get('/graph2', function () {
-    return View('graph2');
+  return View::make('greeting', array('name' => $user->name));
 });
 
 Route::get('/dashboard', function() {
@@ -62,4 +53,24 @@ Route::get('/twitter', function() {
 
 Route::get('/login', function() {
   return View('login');
+});
+
+// Custom API's below
+// Facebook
+Route::get('/fbReactionsPerPost', function()
+{
+  $fb = new MyFacebookApi();
+  return $fb->getNumberOfReactionsPerPost('GigaSavvy', 5);
+});
+
+Route::get('/fbCommentsPerPost', function()
+{
+  $fb = new MyFacebookApi();
+  return $fb->getNumberOfCommentsPerPost('GigaSavvy', 5);
+});
+
+Route::get('/fbPageLikeCount', function()
+{
+  $fb = new MyFacebookApi();
+  return $fb->getPageLikeCount('GigaSavvy');
 });

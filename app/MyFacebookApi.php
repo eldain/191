@@ -16,7 +16,7 @@ class MyFacebookApi
      * URL Called: https://graph.facebook.com/{$pageId}/?fields=fan_count&
      * access_token={$appid}|{$appsecret}
      *
-     * @return String
+     * @return String 
      */
     public function getPageLikeCount($pageId)
     {
@@ -43,7 +43,7 @@ class MyFacebookApi
      * feed/?fields=reactions.summary(total_count)&limit=2&
      * access_token={$appid}|{$appsecret}
      *
-     * @return String
+     * @return String EX: 0,2,3,4
      */
     public function getNumberOfReactionsPerPost($pageId, $limit)
     {
@@ -73,7 +73,7 @@ class MyFacebookApi
      * feed/?fields=comments.summary(total_count)&limit=2&
      * access_token={$appid}|{$appsecret}
      *
-     * @return String
+     * @return String EX: 0,2,3,4
      */
     public function getNumberOfCommentsPerPost($pageId, $limit)
     {
