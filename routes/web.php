@@ -12,7 +12,6 @@
 */
 
 // Import Custom Classes
-use App\MyFacebookApi;
 use App\MyTwitterApi;
 use App\MyInstagramApi;
 
@@ -21,6 +20,9 @@ use App\MyInstagramApi;
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/fbReactionsPerPost', 'FacebookController@getReactionsPer');
+Route::get('/fbCommentsPerPost', 'FacebookController@getCommentsPerPost');
+Route::get('/fbPageLikeCount', 'FacebookController@getPageLikeCount');
 
 Route::get('/', function () {
     return view('welcome');
@@ -58,31 +60,9 @@ Route::get('/twitter', function() {
   return View('twitter');
 });
 
-// Route::get('/login', function() {
-//   return View('login');
-// });
 
 // Custom API's below
-// Facebook
-// Example: http://homestead.app/fbReactionsPerPost/GigaSavvy/5
-Route::get('/fbReactionsPerPost/{user?}/{post_count?}',
-  function($user = 'GigaSavvy', $post_count = 5) {
-  $fb = new MyFacebookApi();
-  return $fb->getNumberOfReactionsPerPost($user, $post_count);
-});
-
-Route::get('/fbCommentsPerPost/{user?}/{post_count?}',
-  function($user = 'GigaSavvy', $post_count = 5) {
-  $fb = new MyFacebookApi();
-  return $fb->getNumberOfCommentsPerPost($user , $post_count);
-});
-
-Route::get('/fbPageLikeCount/{user?}', function($user = 'GigaSavvy')
-{
-  $fb = new MyFacebookApi();
-  return $fb->getPageLikeCount($user);
-});
-
+//TODO: Move these to own controller
 //Twitter
 Route::get('/twLastRetweetCount/{user?}', function($user = 'Gigasavvy')
 {
