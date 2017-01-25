@@ -109,3 +109,7 @@ Route::get('/InstaNumberOffFollowers/{user?}', function($user = '220678271')
   $instagram = new MyInstagramApi();
   return $instagram->getNumberOfFollowers($user);
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
