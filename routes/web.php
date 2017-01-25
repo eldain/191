@@ -17,6 +17,11 @@ use App\MyTwitterApi;
 use App\MyInstagramApi;
 
 
+// For Login
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -53,9 +58,9 @@ Route::get('/twitter', function() {
   return View('twitter');
 });
 
-Route::get('/login', function() {
-  return View('login');
-});
+// Route::get('/login', function() {
+//   return View('login');
+// });
 
 // Custom API's below
 // Facebook
@@ -110,6 +115,4 @@ Route::get('/InstaNumberOffFollowers/{user?}', function($user = '220678271')
   return $instagram->getNumberOfFollowers($user);
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index');
