@@ -47,6 +47,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        //TODO: add Social media fields
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -66,6 +67,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'facebook' => 'null',
+            'twitter' => 'null',
+            'instagram' => 'null',
         ]);
     }
 }

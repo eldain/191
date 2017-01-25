@@ -13,14 +13,15 @@ class FacebookController extends Controller
      */
     public function getReactionsPer(Request $request)
     {
-        //TODO: test when null check fails
-        if(\Auth::check() && \Auth::user()->facebook != null) {
+        if (!\Auth::check()){
+            return 'not logged in';
+        } else if (\Auth::user()->facebook == 'null') {
+            return 'facebook username not set';
+        } else {
             $user = \Auth::user()->facebook;
             $post_count = $request->input('post_count', 5);
             $fb = new MyFacebookApi();
             return $fb->getNumberOfReactionsPerPost($user, $post_count);
-        } else {
-            return 'not logged in';
         }
   
     }
@@ -31,13 +32,15 @@ class FacebookController extends Controller
      */
     public function getCommentsPerPost(Request $request)
     {
-        if(\Auth::check() && \Auth::user()->facebook != null) {
+        if (!\Auth::check()){
+            return 'not logged in';
+        } else if (\Auth::user()->facebook == 'null') {
+            return 'facebook username not set';
+        } else {
             $user = \Auth::user()->facebook;
             $post_count = $request->input('post_count', 5);
             $fb = new MyFacebookApi();
             return $fb->getNumberOfCommentsPerPost($user, $post_count);
-        } else {
-            return 'not logged in';
         }
     }
 
@@ -47,12 +50,14 @@ class FacebookController extends Controller
      */
     public function getPageLikeCount(Request $request)
     {
-        if(\Auth::check() && \Auth::user()->facebook != null) {
+        if (!\Auth::check()){
+            return 'not logged in';
+        } else if (\Auth::user()->facebook == 'null') {
+            return 'facebook username not set';
+        } else {
             $user = \Auth::user()->facebook;
             $fb = new MyFacebookApi();
-            return $fb->getPageLikeCount($user);
-        } else {
-            return 'not logged in';
+            return $fb->getPageLikeCount($user);;
         }
     }
 }
