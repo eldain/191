@@ -7,6 +7,7 @@
 	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"> -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link href="https://fonts.googleapis.com/css?family=Merriweather:400,700|Open+Sans:400,600" rel="stylesheet">
+	<script src="/js/script.js" charset="utf-8"></script>
 @stop
 @section('body')
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
