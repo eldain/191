@@ -9,6 +9,7 @@ class FacebookController extends Controller
 {
     /**
      * Get Facebook reactions per post.
+     * Example url: /fbReactionsPerPost?post_count=10
      * @return Response
      */
     public function getReactionsPer(Request $request)
@@ -28,6 +29,7 @@ class FacebookController extends Controller
 
     /**
      * Get Facebook comments per post.
+     * Example url: /fbCommentsPerPost?post_count=10
      * @return Response
      */
     public function getCommentsPerPost(Request $request)
@@ -46,6 +48,7 @@ class FacebookController extends Controller
 
     /**
      * Get number of likes on Facebook Page.
+     * Example url: /fbPageLikeCount
      * @return Response
      */
     public function getPageLikeCount(Request $request)

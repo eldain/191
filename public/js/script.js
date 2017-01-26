@@ -1,6 +1,6 @@
 function test(){
   fetch('/fbReactionsPerPost?post_count=10')
-    .then((resp) => console.log(resp))
+    .then((resp) => console.log(resp.text()))
     .catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
     });
