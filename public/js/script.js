@@ -1,9 +1,13 @@
 function test(){
-  fetch('/fbReactionsPerPost?post_count=10')
+  fetch('/fbReactionsPerPost?user=' + userFB + '&post_count=10')
     .then((resp) => console.log(resp.text()))
     .catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
     });
+}
+
+function test5(){
+  console.log(userFB);
 }
 
 

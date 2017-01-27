@@ -7,6 +7,15 @@
 	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"> -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link href="https://fonts.googleapis.com/css?family=Merriweather:400,700|Open+Sans:400,600" rel="stylesheet">
+	@if (!Auth::guest())
+		<script type="text/javascript">
+			var userFB = '{{ Auth::user()->facebook }}'
+		</script>
+	@else
+		<script type="text/javascript">
+			var userFB = 'not_logged_in'
+		</script>
+	@endif
 	<script src="/js/script.js" charset="utf-8"></script>
 @stop
 @section('body')

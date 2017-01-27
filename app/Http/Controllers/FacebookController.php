@@ -9,17 +9,17 @@ class FacebookController extends Controller
 {
     /**
      * Get Facebook reactions per post.
-     * Example url: /fbReactionsPerPost?post_count=10
+     * Example url: /fbReactionsPerPost?user={username}&post_count=10
      * @return Response
      */
     public function getReactionsPer(Request $request)
     {
-        if (!\Auth::check()){
+        $user = $request->input('user', 'null');
+        if ($user == 'not_logged_in'){
             return 'not logged in';
-        } else if (\Auth::user()->facebook == 'null') {
+        } else if ($user == 'null') {
             return 'facebook username not set';
         } else {
-            $user = \Auth::user()->facebook;
             $post_count = $request->input('post_count', 5);
             $fb = new MyFacebookApi();
             return $fb->getNumberOfReactionsPerPost($user, $post_count);
@@ -29,17 +29,17 @@ class FacebookController extends Controller
 
     /**
      * Get Facebook comments per post.
-     * Example url: /fbCommentsPerPost?post_count=10
+     * Example url: /fbCommentsPerPost?user={username}&post_count=10
      * @return Response
      */
     public function getCommentsPerPost(Request $request)
     {
-        if (!\Auth::check()){
+        $user = $request->input('user', 'null');
+        if ($user == 'not_logged_in'){
             return 'not logged in';
-        } else if (\Auth::user()->facebook == 'null') {
+        } else if ($user == 'null') {
             return 'facebook username not set';
         } else {
-            $user = \Auth::user()->facebook;
             $post_count = $request->input('post_count', 5);
             $fb = new MyFacebookApi();
             return $fb->getNumberOfCommentsPerPost($user, $post_count);
@@ -48,14 +48,15 @@ class FacebookController extends Controller
 
     /**
      * Get number of likes on Facebook Page.
-     * Example url: /fbPageLikeCount
+     * Example url: /fbPageLikeCount?user={username}
      * @return Response
      */
     public function getPageLikeCount(Request $request)
     {
-        if (!\Auth::check()){
+        $user = $request->input('user', 'null');
+        if ($user == 'not_logged_in'){
             return 'not logged in';
-        } else if (\Auth::user()->facebook == 'null') {
+        } else if ($user == 'null') {
             return 'facebook username not set';
         } else {
             $user = \Auth::user()->facebook;
