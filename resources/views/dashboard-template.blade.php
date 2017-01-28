@@ -16,6 +16,7 @@
 			var userFB = 'not_logged_in'
 		</script>
 	@endif
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="/js/script.js" charset="utf-8"></script>
 @stop
 @section('body')
