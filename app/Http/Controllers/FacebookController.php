@@ -59,7 +59,6 @@ class FacebookController extends Controller
         } else if ($user == 'null') {
             return 'facebook username not set';
         } else {
-            $user = \Auth::user()->facebook;
             $fb = new MyFacebookApi();
             return $fb->getPageLikeCount($user);;
         }
