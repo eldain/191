@@ -13,13 +13,13 @@
 			</div>
 			<br>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<input class="mdl-textfield__input" type="text" id="password">
-				<label class="mdl-textfield__label white" for="password">Password</label>
+				<input class="mdl-textfield__input" type="text" id="email">
+				<label class="mdl-textfield__label white" for="email">Email</label>
 			</div>
 			<br>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<input class="mdl-textfield__input" type="text" id="email">
-				<label class="mdl-textfield__label white" for="email">Email</label>
+				<input class="mdl-textfield__input" type="text" id="password">
+				<label class="mdl-textfield__label white" for="password">Password</label>
 			</div>
 
 			<h2 class="white">API Credentials</h2>
