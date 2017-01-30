@@ -40,7 +40,7 @@ class MyFacebookApi
      * Get a number of reactions and comments per post, with post times
      * 
      * URL Called: https://graph.facebook.com/{$pageId}/
-     * feed/?fields=message,updated_time,reactions.summary(total_count),
+     * posts/?fields=message,updated_time,reactions.summary(total_count),
      * comments.summary(total_count)&limit={$limit}&access_token={$appid}|{$appsecret}
      *
      * @return String in JSON format
@@ -49,15 +49,13 @@ class MyFacebookApi
     {
         //Construct a Facebook URL
         $json_url = $this->FbGraphHost . $pageId 
-        . '/feed/?fields=message,updated_time,reactions.summary(total_count),comments.summary(total_count)&limit='
+        . '/posts/?fields=message,updated_time,reactions.summary(total_count),comments.summary(total_count)&limit='
         . $limit . '&access_token=' . $this->appid.'|'.$this->appsecret;
 
         $json = file_get_contents($json_url);
-        //TODO: Trim JSON
         $json_output = json_decode($json);
         $data_array = [];
         if($json_output->data){
-
             foreach ($json_output->data as $post){
                 $data_to_add = new \stdClass();
                 $data_to_add->message = $post->message;
@@ -66,9 +64,7 @@ class MyFacebookApi
                 $data_to_add->comments = $post->comments->summary->total_count;
                 array_push($data_array, $data_to_add);
             }
-
         }
-
 
         return json_encode($data_array);
 
