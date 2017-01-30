@@ -21,7 +21,9 @@
 				<input class="mdl-textfield__input" type="text" id="password">
 				<label class="mdl-textfield__label white" for="password">Password</label>
 			</div>
+		</form>
 
+		<form action="#">
 			<h2 class="white">API Credentials</h2>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 				<input class="mdl-textfield__input" type="text" id="facebook">

@@ -1,5 +1,17 @@
 // Remember that userFB is set on the page that loads this script page
 
+function getData(){
+  let myURL = `fb`;
+  fetch(myURL)
+    .then(resp => {
+      console.log(resp.json());
+      return resp.json();
+    })
+    .catch(function(error) {
+      console.log('There has been a problem with your fetch operation: ' + error.message);
+    });
+}
+
 function getPageLikes(){
   let URL = `/fbPageLikeCount?user=${userFB}`;
   fetch(URL)
@@ -67,7 +79,11 @@ function drawLineColors() {
         },
         width: 900,
         height: 400,
-        colors: ['#759FFA']
+        colors: ['#759FFA'],
+        backgroundColor: {
+          fill: '#46C29C',
+          // or fill:'transparent'
+        }
       };
 
       var chart = new google.visualization.LineChart(document.querySelector('#chart_div'));
