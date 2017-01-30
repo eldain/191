@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/fbReactionsPerPost', 'FacebookController@getReactionsPer');
 Route::get('/fbCommentsPerPost', 'FacebookController@getCommentsPerPost');
 Route::get('/fbPageLikeCount', 'FacebookController@getPageLikeCount');
+Route::get('/fbGetFeedData', 'FacebookController@getFeedData');
 
 Route::get('/', function () {
     return view('welcome');
