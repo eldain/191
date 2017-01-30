@@ -1,39 +1,45 @@
 // Remember that userFB is set on the page that loads this script page
 
-function getData(){
-  let myURL = `fb`;
-  fetch(myURL)
+function getData(postCount){
+  let myURL = `/fbGetFeedData?user=${userFB}&post_count=${postCount}`
+  return fetch(myURL)
     .then(resp => {
-      console.log(resp.json());
-      return resp.json();
+      if(resp.ok){
+        return resp.json();
+      }
+      throw new Error('Network response was not ok.');
     })
+    .then(value => {return value;})
     .catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
     });
+}
+
+function filterForComments(data){
+  let commentArray = data.map(post => {
+    let date = new Date(post.time);
+    let month = date.getMonth();
+    let day = date.getDate();
+    return [`${month}/${day}`, post.comments]
+  });
+  console.log(commentArray.reverse());
+  return commentArray.reverse();
+}
+
+function filterForReactions(data){
+  let reactionsArray = data.map(post => {
+    let date = new Date(post.time);
+    let month = date.getMonth();
+    let day = date.getDate();
+    return [`${month}/${day}`, post.reactions]
+  });
+  console.log(reactionsArray.reverse());
+  return reactionsArray.reverse();
 }
 
 function getPageLikes(){
-  let URL = `/fbPageLikeCount?user=${userFB}`;
-  fetch(URL)
-    .then(resp => console.log(resp.text()))
-    .catch(function(error) {
-      console.log('There has been a problem with your fetch operation: ' + error.message);
-    });
-}
-
-// Ideally would be able to call resp.json instead of .text, then pass that value to createChartData
-function getReactions(postCount){
-  let myURL = `/fbReactionsPerPost?user=${userFB}&post_count=${postCount}`;
+  let myURL = `/fbPageLikeCount?user=${userFB}`;
   fetch(myURL)
-    .then(resp => console.log(resp.text()))
-    .catch(function(error) {
-      console.log('There has been a problem with your fetch operation: ' + error.message);
-    });
-}
-
-function getComments(postCount){
-  let URL = `/fbCommentsPerPost?user=${userFB}&post_count=${postCount}`;
-  fetch(URL)
     .then(resp => console.log(resp.text()))
     .catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
@@ -42,7 +48,7 @@ function getComments(postCount){
 
 function createChartData(){
   let i = 0;
-  let testArray = [1,2,44,4,5,30,7,3]
+  let testArray = [1,2,44,4,5,30,7,4,5,30,7]
 
   let newArray = testArray.map(x => {
     return [x];
@@ -65,9 +71,7 @@ function drawLineColors() {
       data.addColumn('string', 'Posts');
       data.addColumn('number', 'Likes');
 
-      // data.addRows([
-      //   [0,2],  [1, 4],  [2, 5],  [3, 9]
-      // ]);
+      // addRows format [[a,b],[c,d],...]
       data.addRows(createChartData());
 
       var options = {
