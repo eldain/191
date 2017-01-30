@@ -14,7 +14,7 @@ class FacebookController extends Controller
      */
     public function getReactionsPer(Request $request)
     {
-        $user = $request->input('user', 'null');
+        $user = $request->input('user', 'not_logged_in');
         if ($user == 'not_logged_in'){
             return 'not logged in';
         } else if ($user == 'null') {
@@ -27,6 +27,7 @@ class FacebookController extends Controller
   
     }
 
+
     /**
      * Get Facebook reactions per post.
      * Example url: /fbGetFeedData?user={username}&post_count=10
@@ -34,7 +35,7 @@ class FacebookController extends Controller
      */
     public function getFeedData(Request $request)
     {
-        $user = $request->input('user', 'null');
+        $user = $request->input('user', 'not_logged_in');
         if ($user == 'not_logged_in'){
             return 'not logged in';
         } else if ($user == 'null') {
@@ -48,13 +49,35 @@ class FacebookController extends Controller
     }
 
     /**
+     * Get Facebook reactions per post.
+     * Example url: /getFeedDateRange?user={username}
+     *              &since={unicodedate}&until={unicodedate}
+     * @return Response
+     */
+    public function getFeedDateRange(Request $request)
+    {
+        $user = $request->input('user', 'not_logged_in');
+        if ($user == 'not_logged_in'){
+            return 'not logged in';
+        } else if ($user == 'null') {
+            return 'facebook username not set';
+        } else {
+            $since = $request->input('since');
+            $until = $request->input('until');
+            $fb = new MyFacebookApi();
+            return $fb->getFeedDataInDateRange($user, $since, $until, 100, 0);
+        }
+  
+    }
+
+    /**
      * Get Facebook comments per post.
      * Example url: /fbCommentsPerPost?user={username}&post_count=10
      * @return Response
      */
     public function getCommentsPerPost(Request $request)
     {
-        $user = $request->input('user', 'null');
+        $user = $request->input('user', 'not_logged_in');
         if ($user == 'not_logged_in'){
             return 'not logged in';
         } else if ($user == 'null') {
@@ -73,7 +96,7 @@ class FacebookController extends Controller
      */
     public function getPageLikeCount(Request $request)
     {
-        $user = $request->input('user', 'null');
+        $user = $request->input('user', 'not_logged_in');
         if ($user == 'not_logged_in'){
             return 'not logged in';
         } else if ($user == 'null') {
