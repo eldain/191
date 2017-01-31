@@ -101,7 +101,11 @@ class MyFacebookApi
         if($json_output->data){
             foreach ($json_output->data as $post){
                 $data_to_add = new \stdClass();
-                $data_to_add->message = $post->message;
+                if(isset($post->message) && ($post->message!=null)){
+                    $data_to_add->message = $post->message;
+                } else {
+                    $data_to_add->message = "";
+                }
                 $data_to_add->time = $post->updated_time;
                 $data_to_add->reactions = $post->reactions->summary->total_count;
                 $data_to_add->comments = $post->comments->summary->total_count;
