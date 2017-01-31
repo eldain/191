@@ -14,6 +14,7 @@
 		    echo '<h3> Number of Comments per post: ' . $fb->getNumberOfCommentsPerPost('GigaSavvy', 5) . '</h3>';
 		?> -->
 		<div class="mt4 shadow-2" id="chart_div"></div>
+		<button type="button" name="button" class="mdl-button chart-button bg-white gold">Create that Graph!</button>
 
 	</div>
 </main>

@@ -1,5 +1,9 @@
 // Remember that userFB is set on the page that loads this script page
 
+const chartButton = document.querySelector('.chart-button');
+let comments;
+let reactions;
+
 function getData(postCount){
   let myURL = `/fbGetFeedData?user=${userFB}&post_count=${postCount}`
   return fetch(myURL)
@@ -9,7 +13,11 @@ function getData(postCount){
       }
       throw new Error('Network response was not ok.');
     })
-    .then(value => {return value;})
+    .then(value => {
+      comments = filterForComments(value);
+      reactions = filterForReactions(value);
+      drawLineColors(comments);
+    })
     .catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
     });
@@ -22,7 +30,6 @@ function filterForComments(data){
     let day = date.getDate();
     return [`${month}/${day}`, post.comments]
   });
-  console.log(commentArray.reverse());
   return commentArray.reverse();
 }
 
@@ -33,7 +40,6 @@ function filterForReactions(data){
     let day = date.getDate();
     return [`${month}/${day}`, post.reactions]
   });
-  console.log(reactionsArray.reverse());
   return reactionsArray.reverse();
 }
 
@@ -64,15 +70,15 @@ function createChartData(){
 
 
 google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(drawLineColors);
+// google.charts.setOnLoadCallback(drawLineColors);
 
-function drawLineColors() {
+function drawLineColors(chartData) {
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Posts');
       data.addColumn('number', 'Likes');
 
       // addRows format [[a,b],[c,d],...]
-      data.addRows(createChartData());
+      data.addRows(chartData);
 
       var options = {
         hAxis: {
@@ -93,3 +99,8 @@ function drawLineColors() {
       var chart = new google.visualization.LineChart(document.querySelector('#chart_div'));
       chart.draw(data, options);
 }
+
+chartButton.addEventListener('click',() =>{
+  getData(50);
+  chartButton.remove();
+});
