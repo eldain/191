@@ -80,18 +80,28 @@ function drawLineColors(chartData) {
       // addRows format [[a,b],[c,d],...]
       data.addRows(chartData);
 
+      vAxis:{
+
+       }
+
       var options = {
         hAxis: {
           title: 'Recent Posts',
+          baselineColor: '#FFF',
+          gridlineColor: '#FFF',
+          textStyle:{color: '#FFF'}
         },
         vAxis: {
-          title: 'Number of Likes'
+          title: 'Number of Likes',
+          baselineColor: '#FFF',
+          gridlineColor: '#FFF',
+          textStyle:{color: '#FFF'}
         },
         width: 900,
         height: 400,
-        colors: ['#759FFA'],
+        colors: ['#BBA43F'],
         backgroundColor: {
-          fill: '#46C29C',
+          fill: '#404040',
           // or fill:'transparent'
         }
       };
