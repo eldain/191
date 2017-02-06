@@ -50,7 +50,7 @@ class FacebookController extends Controller
 
     /**
      * Get Facebook reactions per post.
-     * Example url: /getFeedDateRange?user={username}
+     * Example url: /fbGetFeedDateRange?user={username}
      *              &since={unicodedate}&until={unicodedate}
      * @return Response
      */

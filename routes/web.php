@@ -19,16 +19,16 @@ use App\MyInstagramApi;
 // For Login
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 Route::get('/fbReactionsPerPost', 'FacebookController@getReactionsPer');
 Route::get('/fbCommentsPerPost', 'FacebookController@getCommentsPerPost');
 Route::get('/fbPageLikeCount', 'FacebookController@getPageLikeCount');
 Route::get('/fbGetFeedData', 'FacebookController@getFeedData');
 Route::get('/fbGetFeedDateRange', 'FacebookController@getFeedDateRange');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 /* (lukeraus) test URL below */
 Route::get('/test', function () {
