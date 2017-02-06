@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"> -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link href="https://fonts.googleapis.com/css?family=Merriweather:400,700|Open+Sans:400,600" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Merriweather:400,700|Open+Sans:400,600|Montserrat:400,600" rel="stylesheet">
 @stop
 @section('body')
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">

@@ -20,8 +20,54 @@
 }*/
 
 html, body {
-  font-family: 'Roboto', 'Helvetica', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  /*font-family: 'Roboto', 'Helvetica', sans-serif;*/
 }
+
+.dark-grey{
+  color: #4C4C4C;
+}
+
+.off-white{
+  color:#F5F5FA;
+}
+
+.bg-gold{
+  background-color:#AB9657 !important;
+}
+
+
+h2{
+  font-family: sans-serif;
+  color:#BEA761;
+  font-size: 30px;
+}
+
+.mdl-card--horizontal {
+  flex-direction: column;
+  padding-left: 150px;
+  width: 50%;
+  background-color:#404040;
+  
+  .mdl-card__supporting-text {
+    flex: 1 1 auto;
+    width: auto;
+  }
+}
+
+.mdl-textfield--floating-label.is-focused .mdl-textfield__label,.mdl-textfield--floating-label.is-dirty .mdl-textfield__label,.mdl-textfield--floating-label.has-placeholder .mdl-textfield__label{
+  color: #F5F5FA;
+  font-size: 18px;
+
+}
+.mdl-textfield__label:after{
+  background-color:#F5F5FA;
+}
+
+.mdl-textfield__input{
+  color:#9A9A9A;
+}
+
 .demo-avatar {
   width: 48px;
   height: 48px;
