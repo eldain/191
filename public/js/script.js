@@ -23,6 +23,26 @@ function getData(postCount){
     });
 }
 
+let startDate = "01/01/2016";
+let endDate = "01/01/2017";
+function getDateData(start, end){
+  let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}`
+  return fetch(myURL)
+    .then(resp => {
+      if(resp.ok){
+        console.log(resp.json());
+      }
+      throw new Error('Network response was not ok.');
+    })
+    .catch(function(error) {
+      console.log('There has been a problem with your fetch operation: ' + error.message);
+    });
+}
+
+// This works!
+// A years worth of posts!
+// getDateData(startDate, endDate);
+
 function filterForComments(data){
   let commentArray = data.map(post => {
     let date = new Date(post.time);
