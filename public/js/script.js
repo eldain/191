@@ -1,6 +1,6 @@
 // Remember that userFB is set on the page that loads this script page
 
-const chartButton = document.querySelector('.chart-button');
+const mainChart = document.querySelector('.main-chart');
 let comments;
 let reactions;
 
@@ -80,37 +80,35 @@ function drawLineColors(chartData) {
       // addRows format [[a,b],[c,d],...]
       data.addRows(chartData);
 
-      vAxis:{
-
-       }
-
       var options = {
+        legendTextStyle: { color: '#FFF' },
         hAxis: {
           title: 'Recent Posts',
           baselineColor: '#FFF',
           gridlineColor: '#FFF',
-          textStyle:{color: '#FFF'}
+          textStyle:{color: '#FFF'},
+          titleTextStyle: {color: '#FFF'}
         },
         vAxis: {
           title: 'Number of Likes',
           baselineColor: '#FFF',
           gridlineColor: '#FFF',
-          textStyle:{color: '#FFF'}
+          textStyle:{color: '#FFF'},
+          titleTextStyle: {color: '#FFF'}
         },
-        width: 900,
-        height: 400,
+        //need to figure out ability to resize
+        width: mainChart.innerWidth,
+        height: mainChart.innerHeight,
         colors: ['#BBA43F'],
         backgroundColor: {
           fill: '#404040',
-          // or fill:'transparent'
         }
       };
 
-      var chart = new google.visualization.LineChart(document.querySelector('#chart_div'));
+      var chart = new google.visualization.LineChart(document.querySelector('.main-chart'));
       chart.draw(data, options);
 }
 
-chartButton.addEventListener('click',() =>{
+mainChart.addEventListener('click',() =>{
   getData(50);
-  chartButton.remove();
 });

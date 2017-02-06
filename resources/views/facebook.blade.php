@@ -4,18 +4,18 @@
 @section('dashboard-title', 'Facebook Updates')
 @section('dashboard-body')
 
-<main class="mdl-layout__content content-background">
-	<div class="mdl-grid demo-content gold">
-		<!-- <?php
-			use App\MyFacebookApi;
-			$fb = new MyFacebookApi();
-			echo '<h3>GigaSavvy number of likes = ' . $fb->getPageLikeCount('GigaSavvy') . '</h3>';
-		    echo '<h3> Number of Reactions per post: ' . $fb->getNumberOfReactionsPerPost('GigaSavvy', 5) . '</h3>';
-		    echo '<h3> Number of Comments per post: ' . $fb->getNumberOfCommentsPerPost('GigaSavvy', 5) . '</h3>';
-		?> -->
-		<div class="mt4 shadow-2" id="chart_div"></div>
-		<button type="button" name="button" class="mdl-button chart-button bg-white gold">Create that Graph!</button>
+<main class="mdl-layout__content content-background flex flex-column flex-wrap vh-75">
+	<div class="main-chart flex justify-center items-center flex-auto bg-gray shadow-2 br2 black ma3 w-75 h-100 pointer">
+		<h1>CLICK HERE...</h1>
+	</div>
 
+	<div class="flex-auto bg-gray shadow-2 br2 black ma3 w-75">
+	</div>
+
+	<div class="flex-auto bg-gray shadow-2 br2 black ma3 w-75">
+	</div>
+
+	<div class="flex-auto bg-gray shadow-2 br2 black ma3 w-75">
 	</div>
 </main>
 
