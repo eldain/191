@@ -20,11 +20,14 @@ use App\MyInstagramApi;
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+// Facebook
 Route::get('/fbReactionsPerPost', 'FacebookController@getReactionsPer');
 Route::get('/fbCommentsPerPost', 'FacebookController@getCommentsPerPost');
 Route::get('/fbPageLikeCount', 'FacebookController@getPageLikeCount');
 Route::get('/fbGetFeedData', 'FacebookController@getFeedData');
 Route::get('/fbGetFeedDateRange', 'FacebookController@getFeedDateRange');
+// Twitter
+Route::get('/twGetLastTweet', 'TwitterController@getLastTweet');
 
 // Route::get('/', function () {
 //     return view('welcome');
