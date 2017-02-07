@@ -1,6 +1,10 @@
 @extends('dashboard-template')
 @section('title', 'Facebook Updates')
 
+@section('scripts')
+	<script src="/js/fb-script.js" charset="utf-8" async></script>
+@stop
+
 @section('dashboard-title', 'Facebook Updates')
 @section('dashboard-body')
 
@@ -9,13 +13,13 @@
 		<h1>CLICK HERE...</h1>
 	</div>
 
-	<div class="flex-auto bg-gray shadow-2 br2 black ma3 w-75">
+	<div class="sub-chart-one flex-auto bg-gray shadow-2 br2 black ma3 w-75">
 	</div>
 
-	<div class="flex-auto bg-gray shadow-2 br2 black ma3 w-75">
+	<div class="sub-chart-two flex-auto bg-gray shadow-2 br2 black ma3 w-75">
 	</div>
 
-	<div class="flex-auto bg-gray shadow-2 br2 black ma3 w-75">
+	<div class="sub-chart-three flex-auto bg-gray shadow-2 br2 black ma3 w-75">
 	</div>
 </main>
 
