@@ -36,7 +36,7 @@
 					<?php
 						use App\MyInstagramApi;
                 		$instagram = new MyInstagramApi();
-                		echo 'theguitarrevolution has ' . $instagram->getNumberOfFollowers('220678271') . ' followers.';
+                		echo 'theguitarrevolution has ' . $instagram->getNumberOfFollowers('theguitarrevolution') . ' followers.';
 					?>
 				</div>
 				<div class="mdl-card__actions mdl-card--border">
