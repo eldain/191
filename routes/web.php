@@ -11,11 +11,6 @@
 |
 */
 
-// Import Custom Classes
-use App\MyTwitterApi;
-use App\MyInstagramApi;
-
-
 // For Login
 Auth::routes();
 Route::get('/', 'HomeController@index');
