@@ -28,10 +28,9 @@ Route::get('/fbGetFeedData', 'FacebookController@getFeedData');
 Route::get('/fbGetFeedDateRange', 'FacebookController@getFeedDateRange');
 // Twitter
 Route::get('/twGetLastTweet', 'TwitterController@getLastTweet');
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/twGetLastRetweetCount', 'TwitterController@getLastRetweetCount');
+Route::get('/twGetFollowersCount', 'TwitterController@getFollowersCount');
+Route::get('/twGetFollowersData', 'TwitterController@getFollowersData');
 
 /* (lukeraus) test URL below */
 Route::get('/test', function () {
@@ -63,34 +62,6 @@ Route::get('/instagram', function() {
 
 Route::get('/twitter', function() {
   return View('twitter');
-});
-
-
-// Custom API's below
-//TODO: Move these to own controller
-//Twitter
-Route::get('/twLastRetweetCount/{user?}', function($user = 'Gigasavvy')
-{
-  $twitter = new MyTwitterApi();
-  return $twitter->getLastRetweetCount($user);
-});
-
-Route::get('/twFollowersCount/{user?}', function($user = 'Gigasavvy')
-{
-  $twitter = new MyTwitterApi();
-  return $twitter->getFollowersCount($user);
-});
-
-Route::get('/twFollowersByDay/{user?}', function($user = 'Gigasavvy')
-{
-  $twitter = new MyTwitterApi();
-  return $twitter->getFollowersData($user);
-});
-
-Route::get('/twLastTweet/{user?}', function($user = 'Gigasavvy')
-{
-  $twitter = new MyTwitterApi();
-  return $twitter->getLastTweet($user);
 });
 
 //Instagram

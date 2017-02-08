@@ -24,6 +24,62 @@ class TwitterController extends Controller
             $twitter = new MyTwitterApi();
             return $twitter->getLastTweet($user);
         }
-  
+    }
+
+    /**
+     * Get the most recent tweet Retweet count
+     * Example url: /twGetLastRetweetCount?user={username}
+     * @return Response
+     */
+    public function getLastRetweetCount(Request $request)
+    {
+        $user = $request->input('user', 'not_logged_in');
+        if ($user == 'not_logged_in'){
+            return 'not logged in';
+        } else if ($user == 'null') {
+            return 'twitter username not set';
+        } else {
+            // $post_count = $request->input('tweet_count', 5);
+            $twitter = new MyTwitterApi();
+            return $twitter->getLastRetweetCount($user);
+        }
+    }
+
+    /**
+     * Get the number of twitter followers
+     * Example url: /twGetFollowersCount?user={username}
+     * @return Response
+     */
+    public function getFollowersCount(Request $request)
+    {
+        $user = $request->input('user', 'not_logged_in');
+        if ($user == 'not_logged_in'){
+            return 'not logged in';
+        } else if ($user == 'null') {
+            return 'twitter username not set';
+        } else {
+            // $post_count = $request->input('tweet_count', 5);
+            $twitter = new MyTwitterApi();
+            return $twitter->getFollowersCount($user);
+        }
+    }
+
+    /**
+     * Get the number of twitter followers over a period of time
+     * Example url: /twGetFollowersData?user={username}
+     * @return Response
+     */
+    public function getFollowersData(Request $request)
+    {
+        $user = $request->input('user', 'not_logged_in');
+        if ($user == 'not_logged_in'){
+            return 'not logged in';
+        } else if ($user == 'null') {
+            return 'twitter username not set';
+        } else {
+            // $post_count = $request->input('tweet_count', 5);
+            $twitter = new MyTwitterApi();
+            return $twitter->getFollowersData($user);
+        }
     }
 }
