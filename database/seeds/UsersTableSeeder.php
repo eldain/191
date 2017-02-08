@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('secret'),
             'facebook' => 'GigaSavvy',
             'twitter' => 'Gigasavvy',
-            'instagram' => '220678271',
+            'instagram' => 'theguitarrevolution',
         ]);
     }
 }

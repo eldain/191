@@ -18,19 +18,23 @@ use App\MyInstagramApi;
 
 // For Login
 Auth::routes();
-
 Route::get('/', 'HomeController@index');
+
 // Facebook
 Route::get('/fbReactionsPerPost', 'FacebookController@getReactionsPer');
 Route::get('/fbCommentsPerPost', 'FacebookController@getCommentsPerPost');
 Route::get('/fbPageLikeCount', 'FacebookController@getPageLikeCount');
 Route::get('/fbGetFeedData', 'FacebookController@getFeedData');
 Route::get('/fbGetFeedDateRange', 'FacebookController@getFeedDateRange');
+
 // Twitter
 Route::get('/twGetLastTweet', 'TwitterController@getLastTweet');
 Route::get('/twGetLastRetweetCount', 'TwitterController@getLastRetweetCount');
 Route::get('/twGetFollowersCount', 'TwitterController@getFollowersCount');
 Route::get('/twGetFollowersData', 'TwitterController@getFollowersData');
+
+// Instagram
+Route::get('/inGetNumberOfFollowers', 'InstagramController@getNumberOfFollowers');
 
 /* (lukeraus) test URL below */
 Route::get('/test', function () {
@@ -63,12 +67,3 @@ Route::get('/instagram', function() {
 Route::get('/twitter', function() {
   return View('twitter');
 });
-
-//Instagram
-Route::get('/InstaNumberOffFollowers/{user?}', function($user = '220678271')
-{
-  $instagram = new MyInstagramApi();
-  return $instagram->getNumberOfFollowers($user);
-});
-
-
