@@ -14,6 +14,7 @@
 // For Login
 Auth::routes();
 Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 
 // Facebook
 Route::get('/fbReactionsPerPost', 'FacebookController@getReactionsPer');
@@ -30,6 +31,10 @@ Route::get('/twGetFollowersData', 'TwitterController@getFollowersData');
 
 // Instagram
 Route::get('/inGetNumberOfFollowers', 'InstagramController@getNumberOfFollowers');
+
+// Update user
+Route::post('updateUserGeneral', 'UserController@updateGeneralSettings');
+Route::post('updateUserAPI', 'UserController@updateAPISettings');
 
 /* (lukeraus) test URL below */
 Route::get('/test', function () {
@@ -48,7 +53,11 @@ Route::get('/dashboard', function() {
 });
 
 Route::get('/settings', function() {
-  return View('settings');
+	if (Auth::guest()){
+		return redirect('home');
+	} else {
+		return View('settings');
+	}
 });
 
 Route::get('/facebook', function() {
