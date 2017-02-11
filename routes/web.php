@@ -17,20 +17,20 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
 // Facebook
-Route::get('/fbReactionsPerPost', 'FacebookController@getReactionsPer')->middleware('auth');
-Route::get('/fbCommentsPerPost', 'FacebookController@getCommentsPerPost')->middleware('auth');
-Route::get('/fbPageLikeCount', 'FacebookController@getPageLikeCount')->middleware('auth');
-Route::get('/fbGetFeedData', 'FacebookController@getFeedData')->middleware('auth');
-Route::get('/fbGetFeedDateRange', 'FacebookController@getFeedDateRange')->middleware('auth');
+Route::get('/fbReactionsPerPost', 'FacebookController@getReactionsPer');
+Route::get('/fbCommentsPerPost', 'FacebookController@getCommentsPerPost');
+Route::get('/fbPageLikeCount', 'FacebookController@getPageLikeCount');
+Route::get('/fbGetFeedData', 'FacebookController@getFeedData');
+Route::get('/fbGetFeedDateRange', 'FacebookController@getFeedDateRange');
 
 // Twitter
-Route::get('/twGetLastTweet', 'TwitterController@getLastTweet')->middleware('auth');
-Route::get('/twGetLastRetweetCount', 'TwitterController@getLastRetweetCount')->middleware('auth');
-Route::get('/twGetFollowersCount', 'TwitterController@getFollowersCount')->middleware('auth');
-Route::get('/twGetFollowersData', 'TwitterController@getFollowersData')->middleware('auth');
+Route::get('/twGetLastTweet', 'TwitterController@getLastTweet');
+Route::get('/twGetLastRetweetCount', 'TwitterController@getLastRetweetCount');
+Route::get('/twGetFollowersCount', 'TwitterController@getFollowersCount');
+Route::get('/twGetFollowersData', 'TwitterController@getFollowersData');
 
 // Instagram
-Route::get('/inGetNumberOfFollowers', 'InstagramController@getNumberOfFollowers')->middleware('auth');
+Route::get('/inGetNumberOfFollowers', 'InstagramController@getNumberOfFollowers');
 
 // Update user
 Route::post('updateUserGeneral', 'UserController@updateGeneralSettings')->middleware('auth');
