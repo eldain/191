@@ -12,8 +12,45 @@ const thirdSubChart = document.querySelector('.sub-chart-three');
 - update/render panels with charts
 */
 
-let startDate = "01/01/2016";
-let endDate = "01/01/2017";
+function getTodaysDate(){
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+
+  if(dd<10) {
+      dd='0'+dd
+  }
+
+  if(mm<10) {
+      mm='0'+mm
+  }
+
+  today = mm+'/'+dd+'/'+yyyy;
+  return today;
+}
+
+function getStartDate(daysPassed){
+  var today = new Date();
+  today.setDate(today.getDate() - daysPassed);
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+
+  if(dd<10) {
+      dd='0'+dd
+  }
+
+  if(mm<10) {
+      mm='0'+mm
+  }
+
+  today = mm+'/'+dd+'/'+yyyy;
+  return today;
+}
+
+let startDate = getStartDate(10);
+let endDate = getTodaysDate();
 
 function getData(start, end, filter){
   let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}`
@@ -27,7 +64,8 @@ function getData(start, end, filter){
     .then(value => {
       if(filter == "comments"){
         let comments = filterForComments(value);
-        drawMainChart(comments);
+        let allData = filterForAll(value);
+        drawMainChart(allData);
         drawSubChartOne(comments);
         drawSubChartTwo(comments);
         drawSubChartThree(comments);
@@ -64,14 +102,24 @@ function filterForReactions(data){
   return reactionsArray.reverse();
 }
 
-function filterforShares(data){
+function filterForShares(data){
   let sharesArray = data.map(post => {
     let date = new Date(post.time);
     let month = date.getMonth();
     let day = date.getDate();
-    return [`${month}/${day}`, post.shares]
+    return [`${month}/${day}`, post.shares_count]
   });
   return sharesArray.reverse();
+}
+
+function filterForAll(data){
+  let allArray = data.map(post => {
+    let date = new Date(post.time);
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return [`${month}/${day}`, post.reactions, post.comments, post.shares_count]
+  });
+  return allArray.reverse();
 }
 
 function getPageLikes(){
@@ -90,27 +138,29 @@ google.charts.setOnLoadCallback(() => {getData(startDate, endDate, "comments");}
 function drawMainChart(chartData) {
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Posts');
-      data.addColumn('number', 'Likes');
+      data.addColumn('number', 'Reactions');
+      data.addColumn('number', 'Comments');
+      data.addColumn('number', 'Shares');
 
       // addRows format [[a,b],[c,d],...]
       data.addRows(chartData);
 
       var options = {
-        'title': "Test Title",
+        'title': "Overall Facebook Trends ",
         titleTextStyle: {
           color: '#fff',
           fontSize: 20
         },
         legendTextStyle: { color: '#FFF' },
         hAxis: {
-          title: 'Recent Posts',
+          title: 'Post Date',
           baselineColor: '#FFF',
           gridlineColor: '#FFF',
           textStyle:{color: '#FFF'},
           titleTextStyle: {color: '#FFF'}
         },
         vAxis: {
-          title: 'Number of Likes',
+          title: 'Trends',
           baselineColor: '#FFF',
           gridlineColor: '#FFF',
           textStyle:{color: '#FFF'},
@@ -119,7 +169,7 @@ function drawMainChart(chartData) {
         //need to figure out ability to resize
         width: mainChart.innerWidth,
         height: mainChart.innerHeight,
-        colors: ['#BBA43F'],
+        colors: ['#BBA43F',"#57A773", "#AFA2FF"],
         backgroundColor: {
           fill: '#404040',
         }
