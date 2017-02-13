@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/tachyons.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 
     <!-- Scripts -->
     <script>
@@ -20,9 +22,9 @@
         ]); ?>
     </script>
 </head>
-<body>
+<body class ="bg-dark-grey">
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top bg-darker-grey">
             <div class="container">
                 <div class="navbar-header">
 
@@ -35,7 +37,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand off-white" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -50,8 +52,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
+                            <li><a href="{{ url('/login') }}" class="off-white">Login</a></li>
+                            <li><a href="{{ url('/register') }}"" class="off-white">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

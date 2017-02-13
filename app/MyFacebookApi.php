@@ -48,19 +48,24 @@ class MyFacebookApi
      *
      * @return String in JSON format
      */
-    public function getFeedDataInDateRange($pageId, $since, $until, $limit, $offset)
+    public function getFeedDataInDateRange($pageId, $since, $until)
     {
         //Construct a Facebook URL
-        $json_url = $this->FbGraphHost . $pageId 
-        . '/posts/?fields=shares,message,updated_time,reactions.summary(total_count),comments.summary(total_count)&since=' 
-        . $since . '&until='. $until 
-        . '&limit='. $limit . '&offset=' . $offset 
-        . '&access_token=' . $this->appid.'|'.$this->appsecret;
-
-        $json = file_get_contents($json_url);
-        $json_output = json_decode($json);
+        $limit = 30;
+        $offset = 0;
+        
         $data_array = [];
-        if($json_output->data){
+        // if($json_output->data != []){
+        do{
+            $json_url = $this->FbGraphHost . $pageId 
+            . '/posts/?fields=shares,message,updated_time,reactions.summary(total_count),comments.summary(total_count)&since=' 
+            . $since . '&until='. $until 
+            . '&limit='. $limit . '&offset=' . $offset 
+            . '&access_token=' . $this->appid.'|'.$this->appsecret;
+
+            $json = file_get_contents($json_url);
+            $json_output = json_decode($json);
+
             foreach ($json_output->data as $post){
                 $data_to_add = new \stdClass();
                 if(isset($post->message) && ($post->message!=null)){
@@ -78,7 +83,8 @@ class MyFacebookApi
                 $data_to_add->comments = $post->comments->summary->total_count;
                 array_push($data_array, $data_to_add);
             }
-        }
+            $offset += 30;
+        } while($json_output->data != [] );
 
         return json_encode($data_array);
 

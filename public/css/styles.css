@@ -28,12 +28,28 @@ html, body {
   color: #4C4C4C;
 }
 
+.white-border{
+  border-bottom: 1px solid #d3e0e9;
+}
+
+.bg-dark-grey{
+  background-color: #4C4C4C;
+}
+
+.bg-darker-grey{
+  background-color: #404040;
+}
+
 .off-white{
-  color:#F5F5FA;
+  color:#F5F5FA !important;
 }
 
 .bg-gold{
   background-color:#AB9657 !important;
+}
+
+.txt-gold{
+ color:#AB9657 !important;
 }
 
 
