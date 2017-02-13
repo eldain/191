@@ -29,6 +29,8 @@ function getData(start, end, filter){
         let comments = filterForComments(value);
         drawMainChart(comments);
         drawSubChartOne(comments);
+        drawSubChartTwo(comments);
+        drawSubChartThree(comments);
       } else if(filter == "reactions"){
         let reactions = filterForReactions(value);
         drawLineColors(reactions);
@@ -45,7 +47,7 @@ function getData(start, end, filter){
 function filterForComments(data){
   let commentArray = data.map(post => {
     let date = new Date(post.time);
-    let month = date.getMonth();
+    let month = date.getMonth() + 1;
     let day = date.getDate();
     return [`${month}/${day}`, post.comments]
   });
@@ -55,7 +57,7 @@ function filterForComments(data){
 function filterForReactions(data){
   let reactionsArray = data.map(post => {
     let date = new Date(post.time);
-    let month = date.getMonth();
+    let month = date.getMonth() + 1;
     let day = date.getDate();
     return [`${month}/${day}`, post.reactions]
   });
@@ -83,7 +85,7 @@ function getPageLikes(){
 
 
 google.charts.load('current', {packages: ['corechart', 'line']});
-// google.charts.setOnLoadCallback(drawLineColors);
+google.charts.setOnLoadCallback(() => {getData(startDate, endDate, "comments");});
 
 function drawMainChart(chartData) {
       var data = new google.visualization.DataTable();
@@ -94,6 +96,11 @@ function drawMainChart(chartData) {
       data.addRows(chartData);
 
       var options = {
+        'title': "Test Title",
+        titleTextStyle: {
+          color: '#fff',
+          fontSize: 20
+        },
         legendTextStyle: { color: '#FFF' },
         hAxis: {
           title: 'Recent Posts',
@@ -159,80 +166,76 @@ function drawSubChartOne(chartData) {
   chart.draw(data, options);
 }
 
-// function drawMainChart(chartData) {
-//       var data = new google.visualization.DataTable();
-//       data.addColumn('string', 'Posts');
-//       data.addColumn('number', 'Likes');
-//
-//       // addRows format [[a,b],[c,d],...]
-//       data.addRows(chartData);
-//
-//       var options = {
-//         legendTextStyle: { color: '#FFF' },
-//         hAxis: {
-//           title: 'Recent Posts',
-//           baselineColor: '#FFF',
-//           gridlineColor: '#FFF',
-//           textStyle:{color: '#FFF'},
-//           titleTextStyle: {color: '#FFF'}
-//         },
-//         vAxis: {
-//           title: 'Number of Likes',
-//           baselineColor: '#FFF',
-//           gridlineColor: '#FFF',
-//           textStyle:{color: '#FFF'},
-//           titleTextStyle: {color: '#FFF'}
-//         },
-//         //need to figure out ability to resize
-//         width: mainChart.innerWidth,
-//         height: mainChart.innerHeight,
-//         colors: ['#BBA43F'],
-//         backgroundColor: {
-//           fill: '#404040',
-//         }
-//       };
-//
-//       var chart = new google.visualization.LineChart(mainChart);
-//       chart.draw(data, options);
-// }
-//
-// function drawMainChart(chartData) {
-//       var data = new google.visualization.DataTable();
-//       data.addColumn('string', 'Posts');
-//       data.addColumn('number', 'Likes');
-//
-//       // addRows format [[a,b],[c,d],...]
-//       data.addRows(chartData);
-//
-//       var options = {
-//         legendTextStyle: { color: '#FFF' },
-//         hAxis: {
-//           title: 'Recent Posts',
-//           baselineColor: '#FFF',
-//           gridlineColor: '#FFF',
-//           textStyle:{color: '#FFF'},
-//           titleTextStyle: {color: '#FFF'}
-//         },
-//         vAxis: {
-//           title: 'Number of Likes',
-//           baselineColor: '#FFF',
-//           gridlineColor: '#FFF',
-//           textStyle:{color: '#FFF'},
-//           titleTextStyle: {color: '#FFF'}
-//         },
-//         //need to figure out ability to resize
-//         width: mainChart.innerWidth,
-//         height: mainChart.innerHeight,
-//         colors: ['#BBA43F'],
-//         backgroundColor: {
-//           fill: '#404040',
-//         }
-//       };
-//
-//       var chart = new google.visualization.LineChart(mainChart);
-//       chart.draw(data, options);
-// }
+function drawSubChartTwo(chartData) {
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Posts');
+  data.addColumn('number', 'Likes');
 
-mainChart.addEventListener('click',() =>{
-  getData(startDate, endDate, "comments");
-});
+  // addRows format [[a,b],[c,d],...]
+  data.addRows(chartData);
+
+  var options = {
+    legendTextStyle: { color: '#FFF' },
+    hAxis: {
+      title: 'Recent Posts',
+      baselineColor: '#FFF',
+      gridlineColor: '#FFF',
+      textStyle:{color: '#FFF'},
+      titleTextStyle: {color: '#FFF'}
+    },
+    vAxis: {
+      title: 'Number of Likes',
+      baselineColor: '#FFF',
+      gridlineColor: '#FFF',
+      textStyle:{color: '#FFF'},
+      titleTextStyle: {color: '#FFF'}
+    },
+    //need to figure out ability to resize
+    width: secondSubChart.innerWidth,
+    height: secondSubChart.innerHeight,
+    colors: ['#BBA43F'],
+    backgroundColor: {
+      fill: '#404040',
+    }
+  };
+
+  var chart = new google.visualization.LineChart(secondSubChart);
+  chart.draw(data, options);
+}
+
+function drawSubChartThree(chartData) {
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Posts');
+  data.addColumn('number', 'Likes');
+
+  // addRows format [[a,b],[c,d],...]
+  data.addRows(chartData);
+
+  var options = {
+    legendTextStyle: { color: '#FFF' },
+    hAxis: {
+      title: 'Recent Posts',
+      baselineColor: '#FFF',
+      gridlineColor: '#FFF',
+      textStyle:{color: '#FFF'},
+      titleTextStyle: {color: '#FFF'}
+    },
+    vAxis: {
+      title: 'Number of Likes',
+      baselineColor: '#FFF',
+      gridlineColor: '#FFF',
+      textStyle:{color: '#FFF'},
+      titleTextStyle: {color: '#FFF'}
+    },
+    //need to figure out ability to resize
+    width: thirdSubChart.innerWidth,
+    height: thirdSubChart.innerHeight,
+    colors: ['#BBA43F'],
+    backgroundColor: {
+      fill: '#404040',
+    }
+  };
+
+  var chart = new google.visualization.LineChart(thirdSubChart);
+  chart.draw(data, options);
+}
