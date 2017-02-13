@@ -33,8 +33,8 @@ Route::get('/twGetFollowersData', 'TwitterController@getFollowersData');
 Route::get('/inGetNumberOfFollowers', 'InstagramController@getNumberOfFollowers');
 
 // Update user
-Route::post('updateUserGeneral', 'UserController@updateGeneralSettings')->middleware('auth');
-Route::post('updateUserAPI', 'UserController@updateAPISettings')->middleware('auth');
+Route::post('updateUserGeneral', 'UserController@updateGeneralSettings');
+Route::post('updateUserAPI', 'UserController@updateAPISettings');
 
 /* (lukeraus) test URL below */
 Route::get('/test', function () {
