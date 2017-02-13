@@ -28,6 +28,7 @@ Route::get('/twGetLastTweet', 'TwitterController@getLastTweet');
 Route::get('/twGetLastRetweetCount', 'TwitterController@getLastRetweetCount');
 Route::get('/twGetFollowersCount', 'TwitterController@getFollowersCount');
 Route::get('/twGetFollowersData', 'TwitterController@getFollowersData');
+Route::get('/twGetTweets', 'TwitterController@getTweets');
 
 // Instagram
 Route::get('/inGetNumberOfFollowers', 'InstagramController@getNumberOfFollowers');
