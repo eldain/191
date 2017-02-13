@@ -2,7 +2,23 @@
 
 @section('dashboard-title', 'Dashboard')
 @section('dashboard-body')
-<main class="mdl-layout__content content-background">
+<main class="mdl-layout__content content-background flex">
+	<div class="card bg-darker-grey w3 h5 flex-auto ma4 br2 shadow-2">
+		<h1 class="white ml3">Facebook</h1>
+		<a class="link white ml3" href="/facebook">Link</a>
+	</div>
+	<div class="card bg-darker-grey w3 h5 flex-auto ma4 br2 shadow-2">
+		<h1 class="white ml3">Twitter</h1>
+		<a class="link white ml3" href="/twitter">Link</a>
+	</div>
+	<div class="card bg-darker-grey w3 h5 flex-auto ma4 br2 shadow-2">
+		<h1 class="white ml3">Instagram</h1>
+		<a class="link white ml3" href="/instagram">Link</a>
+	</div>
+</main>
+
+<!-- Keeping for reference, will delete once new cards are created -Daniel (Monday, February 13, 2017 @ 15:32) -->
+<!-- <main class="mdl-layout__content content-background">
 
 	<div class="mdl-grid demo-content">
 
@@ -24,7 +40,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 
 		<div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
 
@@ -66,5 +82,5 @@
 		</div>
 
 	</div>
-</main>
+</main> -->
 @stop
