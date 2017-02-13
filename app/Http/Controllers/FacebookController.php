@@ -65,7 +65,7 @@ class FacebookController extends Controller
             $since = $request->input('since');
             $until = $request->input('until');
             $fb = new MyFacebookApi();
-            return $fb->getFeedDataInDateRange($user, $since, $until, 100, 0);
+            return $fb->getFeedDataInDateRange($user, $since, $until);
         }
   
     }
