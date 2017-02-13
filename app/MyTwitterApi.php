@@ -40,6 +40,35 @@ class MyTwitterApi
     }
 
     /**
+     * Get most recent tweets
+     * Date: YYYY-MM-DD
+     *
+     * @return String
+     */
+    public function getTweets($twitterUserName)
+    {
+        $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+        $getfield = '?&screen_name=' . $twitterUserName . '&count=200';
+        $requestMethod = 'GET';
+
+        $response = $this->twitter->setGetfield($getfield)
+                ->buildOauth($url, $requestMethod)
+                ->performRequest();
+
+        $tweets = json_decode($response,true);
+        $data_array = [];
+        for( $i = 0; $i < count($tweets); $i++ ) {
+            $data_to_add = new \stdClass();
+            $data_to_add->text = $tweets[$i]['text'];
+            $data_to_add->created_at = $tweets[$i]['created_at'];
+            $data_to_add->favorite_count = $tweets[$i]['favorite_count'];
+            $data_to_add->retweet_count = $tweets[$i]['retweet_count'];
+            array_push($data_array, $data_to_add);
+        }
+        return json_encode($data_array);
+    }
+
+    /**
      * Get most recent tweet retweet count
      *
      * @return String
