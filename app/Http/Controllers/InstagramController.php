@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class InstagramController extends Controller
 {
     /**
-     * Get the most recent tweet text
+     * Get the number of current follwers for username
      * Example url: /inGetNumberOfFollowers?user={username}
      * @return Response
      */
@@ -20,9 +20,26 @@ class InstagramController extends Controller
         } else if ($user == 'null') {
             return 'instagram username not set';
         } else {
-            // $post_count = $request->input('tweet_count', 5);
             $instagram = new MyInstagramApi();
             return $instagram->getNumberOfFollowers($user);
+        }
+    }
+
+    /**
+     * Get the most recent posts.
+     * Example url: /inGetRecentPosts?user={username}
+     * @return Response
+     */
+    public function getRecentPosts(Request $request)
+    {
+        $user = $request->input('user', 'not_logged_in');
+        if ($user == 'not_logged_in'){
+            return 'not logged in';
+        } else if ($user == 'null') {
+            return 'instagram username not set';
+        } else {
+            $instagram = new MyInstagramApi();
+            return $instagram->getRecentPosts($user);
         }
     }
 }

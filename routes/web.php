@@ -32,6 +32,7 @@ Route::get('/twGetTweets', 'TwitterController@getTweets');
 
 // Instagram
 Route::get('/inGetNumberOfFollowers', 'InstagramController@getNumberOfFollowers');
+Route::get('/inGetRecentPosts', 'InstagramController@getRecentPosts');
 
 // Update user
 Route::post('updateUserGeneral', 'UserController@updateGeneralSettings');
