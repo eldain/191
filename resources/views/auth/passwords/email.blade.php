@@ -5,9 +5,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
+            <div class="panel bg-darker-grey off-white">
+                <div class="panel-heading white-border bg-darker-grey off-white">Reset Password</div>
+                <div class="panel-body bg-darker-grey">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -33,7 +33,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary bg-gold bn off-white">
                                     Send Password Reset Link
                                 </button>
                             </div>
