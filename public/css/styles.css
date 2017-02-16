@@ -59,6 +59,11 @@ h2{
   font-size: 30px;
 }
 
+.button-holder{
+  top: 4vh;
+  left: 5vh;
+}
+
 .mdl-card--horizontal {
   flex-direction: column;
   padding-left: 150px;

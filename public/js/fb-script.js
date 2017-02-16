@@ -4,6 +4,7 @@ const mainChart = document.querySelector('.main-chart');
 const firstSubChart = document.querySelector('.sub-chart-one');
 const secondSubChart = document.querySelector('.sub-chart-two');
 const thirdSubChart = document.querySelector('.sub-chart-three');
+const dayButtons = document.querySelectorAll(".button-holder button");
 
 /*
 - get data
@@ -48,9 +49,6 @@ function getStartDate(daysPassed){
   today = mm+'/'+dd+'/'+yyyy;
   return today;
 }
-
-let startDate = getStartDate(10);
-let endDate = getTodaysDate();
 
 function getData(start, end, filter){
   let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}`
@@ -131,9 +129,12 @@ function getPageLikes(){
     });
 }
 
-
 google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(() => {getData(startDate, endDate, "comments");});
+google.charts.setOnLoadCallback(() => {
+  let startDate = getStartDate(10);
+  let endDate = getTodaysDate();
+  getData(startDate, endDate, "comments");
+});
 
 function drawMainChart(chartData) {
       var data = new google.visualization.DataTable();
@@ -289,3 +290,9 @@ function drawSubChartThree(chartData) {
   var chart = new google.visualization.LineChart(thirdSubChart);
   chart.draw(data, options);
 }
+
+dayButtons.forEach(button => button.addEventListener('click', (e) => {
+  let startDate = getStartDate(e.target.dataset.days);
+  let endDate = getTodaysDate();
+  getData(startDate, endDate, "comments");
+}));
