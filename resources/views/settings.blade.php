@@ -34,7 +34,7 @@
 <div class="mdl-card mdl-shadow--2dp mdl-card--horizontal mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
 		<form action="{{ url('/updateUserAPI') }}" method="POST" class="pl4">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<h2 class="off-white">API Credentials</h2>
+			<h2 class="off-white">Social Usernames</h2>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 				<input class="mdl-textfield__input" type="text" name="facebook" value="{{ Auth::user()->facebook }}">
 				<label class="mdl-textfield__label off-white" for="facebook">Facebook</label>
