@@ -27,26 +27,27 @@
 		</div>
 	</header>
 	<div class="demo-drawer mdl-layout__drawer">
-		<header class="demo-drawer-header">
+
+		<header class="demo-drawer-header tc">
 			<span>Observation Deck</span>
 		</header>
-		    <form id="logout-form" action="{{ url('/logout') }}" method="POST" 
-		    	style="display: none;"> {{ csrf_field() }}
-            </form>
+
+    <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+    	style="display: none;"> {{ csrf_field() }}
+    </form>
+
 		<nav class="demo-navigation mdl-navigation">
 			<a class="mdl-navigation__link" href="/dashboard"><i class="material-icons" role="presentation">home</i>Dashboard</a>
 			<a class="mdl-navigation__link" href="/settings"><i class="material-icons" role="presentation">settings</i>Settings</a>
 			<!-- Authentication Links -->
-	        @if (Auth::guest())
-	            <a class="mdl-navigation__link" href="{{ url('/login') }}">
-	            <i class="material-icons" role="presentation">inbox</i>Login</a>
-            @else
-            	<a class="mdl-navigation__link" href="{{ url('/logout') }}"
-            	   onclick="event.preventDefault();
-            	   			document.getElementById('logout-form').submit();"">
-            	   <i class="material-icons" role="presentation">inbox</i>Logout</a>
-            @endif
+      @if (Auth::guest())
+        <a class="mdl-navigation__link" href="{{ url('/login') }}">
+        <i class="material-icons" role="presentation">done</i>Login</a>
+      @else
+      	<a class="mdl-navigation__link" href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="material-icons" role="presentation">exit_to_app</i>Logout</a>
+      @endif
 		</nav>
+
 	</div>
 	@yield('dashboard-body')
 @stop

@@ -2,7 +2,7 @@
 @section('title', 'Facebook Updates')
 
 @section('scripts')
-	<script src="/js/fb-script.js" charset="utf-8"></script>
+	<script src="/js/fb-script.js" charset="utf-8" async></script>
 @stop
 
 @section('dashboard-title', 'Facebook Updates')
