@@ -36,18 +36,13 @@ Route::get('/inGetRecentPosts', 'InstagramController@getRecentPosts');
 
 // Update user
 Route::post('updateUserGeneral', 'UserController@updateGeneralSettings');
-Route::post('updateUserAPI', 'UserController@updateAPISettings');
+Route::post('updateSocialSettings', 'UserController@updateSocialSettings');
+Route::post('updateAPISettings', 'UserController@updateAPISettings');
 
 /* (lukeraus) test URL below */
 Route::get('/test', function () {
 	$results = DB::select('select * from users', array(1));
     return $results;
-})->middleware('auth');
-
-Route::get('/greeting', function()
-{
-	$user = DB::table('users')->where('name', 'luke')->first();
-  return View::make('greeting', array('name' => $user->name));
 })->middleware('auth');
 
 Route::get('/dashboard', function() {
