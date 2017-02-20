@@ -70,6 +70,8 @@ class RegisterController extends Controller
             'facebook' => 'null',
             'twitter' => 'null',
             'instagram' => 'null',
+            'fb_api_key' => 'null',
+            'fb_api_secret' => 'null',
         ]);
     }
 }

@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('facebook');
             $table->string('twitter');
             $table->string('instagram');
+            $table->string('fb_api_key');
+            $table->string('fb_api_secret');
             $table->rememberToken();
             $table->timestamps();
         });

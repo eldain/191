@@ -18,6 +18,8 @@ class UsersTableSeeder extends Seeder
             'facebook' => 'GigaSavvy',
             'twitter' => 'Gigasavvy',
             'instagram' => 'theguitarrevolution',
+            'fb_api_key' => '1675423156013517',
+            'fb_api_secret' => 'e336cc48fe592916c5968024714d7a89',
         ]);
     }
 }

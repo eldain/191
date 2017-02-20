@@ -32,7 +32,7 @@
 
 
 <div class="mdl-card mdl-shadow--2dp mdl-card--horizontal mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
-		<form action="{{ url('/updateUserAPI') }}" method="POST" class="pl4">
+		<form action="{{ url('/updateSocialSettings') }}" method="POST" class="pl4">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<h2 class="off-white">Social Usernames</h2>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -55,8 +55,28 @@
 	</div>
 		</form>
 	</div>
-	</div>
 
+
+<div class="mdl-card mdl-shadow--2dp mdl-card--horizontal mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+		<form action="{{ url('/updateAPISettings') }}" method="POST" class="pl4">
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<h2 class="off-white">API Keys</h2>
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<input class="mdl-textfield__input" type="text" name="fb_api_key" value="{{ Auth::user()->fb_api_key }}">
+				<label class="mdl-textfield__label off-white" for="fb_api_key">Facebook API ID</label>
+			</div>
+			<br>
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<input class="mdl-textfield__input" type="text" name="fb_api_secret" value="{{ Auth::user()->fb_api_secret }}">
+				<label class="mdl-textfield__label off-white" for="fb_api_secret">Facebook API Secret</label>
+			</div>
+			<div class="mdl-grid demo-content pl0" style ="padding-bottom: 30px">
+		<input type="submit" value="Save" class="mdl-button bg-gold mdl-shadow--2dp" style = "font-family: 'Montserrat'">
+		</input>
+	</div>
+		</form>
+	</div>
+	</div>
 
 </main>
 

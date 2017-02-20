@@ -11,10 +11,14 @@
 	@if (!Auth::guest())
 		<script type="text/javascript">
 			var userFB = '{{ Auth::user()->facebook }}'
+			var fbApiKey = '{{ Auth::user()->fb_api_key }}'
+			var fbApiSecret = '{{ Auth::user()->fb_api_secret }}'
 		</script>
 	@else
 		<script type="text/javascript">
 			var userFB = 'not_logged_in'
+			var fbApiKey = 'not_logged_in'
+			var fbApiSecret = 'not_logged_in'
 		</script>
 	@endif
 @stop

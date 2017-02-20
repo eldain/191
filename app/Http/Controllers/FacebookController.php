@@ -102,8 +102,10 @@ class FacebookController extends Controller
         } else if ($user == 'null') {
             return 'facebook username not set';
         } else {
+            $fbApiKey = $request->input('fbApiKey', 'not_logged_in');
+            $fbApiSecret = $request->input('fbApiSecret', 'not_logged_in');
             $fb = new MyFacebookApi();
-            return $fb->getPageLikeCount($user);;
+            return $fb->getPageLikeCount($user, $fbApiKey, $fbApiSecret);
         }
     }
 }

@@ -96,7 +96,7 @@ function getFBData(start, end){
     });
 }
 function getFBPageLikes(){
-  let myURL = `/fbPageLikeCount?user=${userFB}`;
+  let myURL = `/fbPageLikeCount?user=${userFB}&fbApiKey=${fbApiKey}&fbApiSecret=${fbApiSecret}`;
   fetch(myURL)
 		.then(resp => {
 			if(resp.ok){

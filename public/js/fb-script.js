@@ -121,7 +121,7 @@ function filterForAll(data){
 }
 
 function getPageLikes(){
-  let myURL = `/fbPageLikeCount?user=${userFB}`;
+  let myURL = `/fbPageLikeCount?user=${userFB}&fbApiKey=${fbApiKey}&fbApiSecret=${fbApiSecret}`;
   fetch(myURL)
     .then(resp => console.log(resp.text()))
     .catch(function(error) {

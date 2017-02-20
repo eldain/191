@@ -18,11 +18,11 @@ class MyFacebookApi
      *
      * @return String EX: 100
      */
-    public function getPageLikeCount($pageId)
+    public function getPageLikeCount($pageId, $appid, $appsecret)
     {
         //Construct a Facebook URL
         $json_url = $this->FbGraphHost . $pageId . '/?fields=fan_count&access_token=' 
-        . $this->appid.'|'.$this->appsecret;
+        . $appid.'|'.$appsecret;
 
         $json = file_get_contents($json_url);
         $json_output = json_decode($json);

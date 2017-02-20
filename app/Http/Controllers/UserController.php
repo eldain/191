@@ -27,17 +27,32 @@ class UserController extends Controller
     }
 
     /**
-     * Update API Settings (social media usernames)
-     * Example url: updateUserAPI?facebook={facebook}&instagram={instagram}&twitter={twitter}
+     * Update Social Settings (social media usernames)
+     * Example url: updateSocialSettings?facebook={facebook}&instagram={instagram}&twitter={twitter}
      * @return Response
      */
-    public function updateAPISettings(Request $request)
+    public function updateSocialSettings(Request $request)
     {
         $id = Auth::user()->id;
         $user = User::find($id);
         $user->facebook = $request->input('facebook');
         $user->instagram = $request->input('instagram');
         $user->twitter = $request->input('twitter');
+        $user->save();
+        return redirect('settings');
+    }
+
+    /**
+     * Update API Keys (social media usernames)
+     * Example url: updateAPISettings?fb_api_key={fb_api_key}&fb_api_secret={fb_api_secret}
+     * @return Response
+     */
+    public function updateAPISettings(Request $request)
+    {
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        $user->fb_api_key = $request->input('fb_api_key');
+        $user->fb_api_secret = $request->input('fb_api_secret');
         $user->save();
         return redirect('settings');
     }
