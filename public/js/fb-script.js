@@ -61,12 +61,14 @@ function getData(start, end, filter){
     })
     .then(value => {
       if(filter == "comments"){
-        let comments = filterForComments(value);
         let allData = filterForAll(value);
+        let reactions = filterForReactions(value);
+        let comments = filterForComments(value);
+        let shares = filterForShares(value);
         drawMainChart(allData);
-        drawSubChartOne(comments);
+        drawSubChartOne(reactions);
         drawSubChartTwo(comments);
-        drawSubChartThree(comments);
+        drawSubChartThree(shares);
       } else if(filter == "reactions"){
         let reactions = filterForReactions(value);
         drawLineColors(reactions);
@@ -189,16 +191,21 @@ function drawSubChartOne(chartData) {
   data.addRows(chartData);
 
   var options = {
+    'title': "Reactions",
+    titleTextStyle: {
+      color: '#fff',
+      fontSize: 16
+    },
     legendTextStyle: { color: '#FFF' },
     hAxis: {
-      title: 'Recent Posts',
+      title: 'Posts',
       baselineColor: '#FFF',
       gridlineColor: '#FFF',
       textStyle:{color: '#FFF'},
       titleTextStyle: {color: '#FFF'}
     },
     vAxis: {
-      title: 'Number of Likes',
+      title: 'Reactions',
       baselineColor: '#FFF',
       gridlineColor: '#FFF',
       textStyle:{color: '#FFF'},
@@ -226,16 +233,21 @@ function drawSubChartTwo(chartData) {
   data.addRows(chartData);
 
   var options = {
+    'title': "Comments",
+    titleTextStyle: {
+      color: '#fff',
+      fontSize: 16
+    },
     legendTextStyle: { color: '#FFF' },
     hAxis: {
-      title: 'Recent Posts',
+      title: 'Posts',
       baselineColor: '#FFF',
       gridlineColor: '#FFF',
       textStyle:{color: '#FFF'},
       titleTextStyle: {color: '#FFF'}
     },
     vAxis: {
-      title: 'Number of Likes',
+      title: 'Comments',
       baselineColor: '#FFF',
       gridlineColor: '#FFF',
       textStyle:{color: '#FFF'},
@@ -244,7 +256,7 @@ function drawSubChartTwo(chartData) {
     //need to figure out ability to resize
     width: secondSubChart.innerWidth,
     height: secondSubChart.innerHeight,
-    colors: ['#BBA43F'],
+    colors: ["#57A773"],
     backgroundColor: {
       fill: '#404040',
     }
@@ -263,16 +275,21 @@ function drawSubChartThree(chartData) {
   data.addRows(chartData);
 
   var options = {
+    'title': "Shares",
+    titleTextStyle: {
+      color: '#fff',
+      fontSize: 16
+    },
     legendTextStyle: { color: '#FFF' },
     hAxis: {
-      title: 'Recent Posts',
+      title: 'Posts',
       baselineColor: '#FFF',
       gridlineColor: '#FFF',
       textStyle:{color: '#FFF'},
       titleTextStyle: {color: '#FFF'}
     },
     vAxis: {
-      title: 'Number of Likes',
+      title: 'Shares',
       baselineColor: '#FFF',
       gridlineColor: '#FFF',
       textStyle:{color: '#FFF'},
@@ -281,7 +298,7 @@ function drawSubChartThree(chartData) {
     //need to figure out ability to resize
     width: thirdSubChart.innerWidth,
     height: thirdSubChart.innerHeight,
-    colors: ['#BBA43F'],
+    colors: ["#AFA2FF"],
     backgroundColor: {
       fill: '#404040',
     }
