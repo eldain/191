@@ -1,9 +1,14 @@
 // Relevant dashboard page elements
+const fbCard = document.querySelector(".fb-card");
 const fbReactions = document.querySelector('#fb-reactions');
 const fbComments = document.querySelector('#fb-comments');
 const fbLikes = document.querySelector('#fb-views');
 const fbPosts = document.querySelector('#fb-posts');
 const fbTimeFrame = document.querySelector('#fb-time-frame');
+
+fbCard.addEventListener("click", () => {
+  window.location.href = '/facebook';
+})
 
 // Time frame... could eventually have this set in settings page, using PHP to retrieve?
 let dayCount = 100;
