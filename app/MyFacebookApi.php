@@ -40,7 +40,7 @@ class MyFacebookApi
      * Get a number of reactions and comments per post, with post times
      * 
      * URL Called: https://graph.facebook.com/{$pageId}/
-     * posts/?fields=shares,message,updated_time,
+     * posts/?fields=permalink_url,shares,message,updated_time,
      * reactions.summary(total_count),comments.summary(total_count)
      * &since=06/01/2016&until=08/01/2016
      * &limit=100&offset=0
@@ -58,7 +58,7 @@ class MyFacebookApi
         // if($json_output->data != []){
         do{
             $json_url = $this->FbGraphHost . $pageId 
-            . '/posts/?fields=shares,message,updated_time,reactions.summary(total_count),comments.summary(total_count)&since=' 
+            . '/posts/?fields=permalink_url,shares,message,updated_time,reactions.summary(total_count),comments.summary(total_count)&since=' 
             . $since . '&until='. $until 
             . '&limit='. $limit . '&offset=' . $offset 
             . '&access_token=' . $this->appid.'|'.$this->appsecret;
@@ -78,6 +78,7 @@ class MyFacebookApi
                 } else {
                     $data_to_add->shares_count = 0;
                 }
+                $data_to_add->url = $post->permalink_url;
                 $data_to_add->time = $post->updated_time;
                 $data_to_add->reactions = $post->reactions->summary->total_count;
                 $data_to_add->comments = $post->comments->summary->total_count;
