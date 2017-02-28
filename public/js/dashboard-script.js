@@ -53,6 +53,21 @@ function getStartDate(daysPassed){
   return today;
 }
 
+// Loader Functions
+function startFBLoader(){
+  var fbLoader = document.querySelector('.fb-loader');
+  var loaderWidth = fbCard.clientWidth;
+  var loaderHeight = fbCard.clientHeight;
+  fbLoader.setAttribute('style', `height:${loaderHeight}px;width:${loaderWidth}px;`);
+  fbLoader.classList.remove('dn');
+  fbLoader.classList.add('flex');
+}
+function endFBLoader(){
+  var fbLoader = document.querySelector('.fb-loader');
+  fbLoader.classList.remove('flex');
+  fbLoader.classList.add('dn');
+}
+
 // Facebook specific data manipulation functions
 function getFBTotalReactions(data){
 	var totalReactions = data.map(post => {
@@ -79,6 +94,7 @@ function getFBTotalPosts(data){
 
 // Get the Facebook data
 function getFBData(start, end){
+  startFBLoader();
   let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}`
   return fetch(myURL)
     .then(resp => {
@@ -91,10 +107,11 @@ function getFBData(start, end){
 			var fbTotalReactions = getFBTotalReactions(value);
 			var fbTotalComments = getFBTotalComments(value);
 			var fbTotalPosts = getFBTotalPosts(value);
- 			fbReactions.innerHTML = fbTotalReactions;
-			fbComments.innerHTML = fbTotalComments;
+ 			fbReactions.innerHTML = numberWithCommas(fbTotalReactions);
+			fbComments.innerHTML = numberWithCommas(fbTotalComments);
 			fbPosts.innerHTML = fbTotalPosts;
 			fbTimeFrame.innerHTML = dayCount;
+      endFBLoader();
     })
     .catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
