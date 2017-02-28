@@ -55,7 +55,6 @@ class MyFacebookApi
         $offset = 0;
         
         $data_array = [];
-        // if($json_output->data != []){
         do{
             $json_url = $this->FbGraphHost . $pageId 
             . '/posts/?fields=permalink_url,shares,message,updated_time,reactions.summary(total_count),comments.summary(total_count)&since=' 
@@ -74,13 +73,13 @@ class MyFacebookApi
             $json = '';
             if( ($json = curl_exec($ch) ) === false)
             {
-                return 'Curl error: ' . curl_error($ch);
+                throw new \Exception('Curl error: ' . curl_error($ch));
             }
             else
             {
                 $json_output = json_decode($json);
                 if(isset($json_output->error)){
-                    return $json;
+                    throw new \Exception($json);
                 } else {
                     foreach ($json_output->data as $post){
                         $data_to_add = new \stdClass();
