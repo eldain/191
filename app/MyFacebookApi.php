@@ -73,7 +73,7 @@ class MyFacebookApi
             $json = '';
             if( ($json = curl_exec($ch) ) === false)
             {
-                return 'Curl error: ' . curl_error($ch);
+                throw new \Exception('Curl error: ' . curl_error($ch));
             }
             else
             {
