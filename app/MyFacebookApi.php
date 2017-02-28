@@ -63,28 +63,46 @@ class MyFacebookApi
             . '&limit='. $limit . '&offset=' . $offset 
             . '&access_token=' . $this->appid.'|'.$this->appsecret;
 
-            $json = file_get_contents($json_url);
-            $json_output = json_decode($json);
+            // old file_get_contents code
+            // $json = file_get_contents($json_url);
+            // $json_output = json_decode($json);
 
-            foreach ($json_output->data as $post){
-                $data_to_add = new \stdClass();
-                if(isset($post->message) && ($post->message!=null)){
-                    $data_to_add->message = $post->message;
-                } else {
-                    $data_to_add->message = "";
-                }
-                if(isset($post->shares) && ($post->shares!=null)){
-                    $data_to_add->shares_count = $post->shares->count;
-                } else {
-                    $data_to_add->shares_count = 0;
-                }
-                $data_to_add->url = $post->permalink_url;
-                $data_to_add->time = $post->updated_time;
-                $data_to_add->reactions = $post->reactions->summary->total_count;
-                $data_to_add->comments = $post->comments->summary->total_count;
-                array_push($data_array, $data_to_add);
+            // TODO: change all code to curl
+            // using curl instead now
+            $ch = curl_init($json_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $json = '';
+            if( ($json = curl_exec($ch) ) === false)
+            {
+                return 'Curl error: ' . curl_error($ch);
             }
-            $offset += 30;
+            else
+            {
+                $json_output = json_decode($json);
+                if(isset($json_output->error)){
+                    return $json;
+                } else {
+                    foreach ($json_output->data as $post){
+                        $data_to_add = new \stdClass();
+                        if(isset($post->message) && ($post->message!=null)){
+                            $data_to_add->message = $post->message;
+                        } else {
+                            $data_to_add->message = "";
+                        }
+                        if(isset($post->shares) && ($post->shares!=null)){
+                            $data_to_add->shares_count = $post->shares->count;
+                        } else {
+                            $data_to_add->shares_count = 0;
+                        }
+                        $data_to_add->url = $post->permalink_url;
+                        $data_to_add->time = $post->updated_time;
+                        $data_to_add->reactions = $post->reactions->summary->total_count;
+                        $data_to_add->comments = $post->comments->summary->total_count;
+                        array_push($data_array, $data_to_add);
+                    }
+                    $offset += 30;
+                }    
+            }
         } while($json_output->data != [] );
 
         return json_encode($data_array);
