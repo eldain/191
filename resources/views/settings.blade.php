@@ -48,11 +48,11 @@
 		</div>
 	</div>
 
-<div class="mdl-grid demo-content justify-center items-center">		
-<button onclick="myFunction()" class="mdl-shadow--2dp" style = "font-family: 'Montserrat'"">Advanced Settings</button>
+<div class="mdl-grid demo-content justify-center items-center">
+<button onclick="myFunction()" class="mdl-shadow--2dp br2 bn pa2 white bg-dark-gray" style = "font-family: 'Montserrat'">Advanced Settings</button>
 </div>
 <div id="myDIV">
-<div class="mdl-grid demo-content justify-center items-center">		
+<div class="mdl-grid demo-content justify-center items-center">
 <div class="mdl-card mdl-shadow--2dp mdl-card--horizontal mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
 		<form action="{{ url('/updateSocialSettings') }}" method="POST" class="pl4">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
