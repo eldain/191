@@ -24,6 +24,10 @@ html, body {
   /*font-family: 'Roboto', 'Helvetica', sans-serif;*/
 }
 
+.bg-gs-logo{
+  background-color:#181818 !important;
+}
+
 .dark-grey{
   color: #4C4C4C;
 }

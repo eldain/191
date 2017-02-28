@@ -1,6 +1,9 @@
 @extends('dashboard-template')
 @section('title', 'Settings')
 @section('dashboard-title', 'Settings')
+@section('scripts')
+	<script src="/js/settings.js" charset="utf-8" async></script>
+@stop
 @section('dashboard-body')
 
 <main class="mdl-layout__content content-background">
@@ -26,11 +29,16 @@
 			<div class="mdl-grid demo-content pl0" style ="padding-bottom: 30px">
 		<input type="submit" value="Save" class="mdl-button bg-gold mdl-shadow--2dp" style = "font-family: 'Montserrat'">
 		</input>
-	</div>
+			</div>
 		</form>
 		</div>
+	</div>
 
-
+<div class="mdl-grid demo-content justify-center items-center">		
+<button onclick="myFunction()" class="mdl-shadow--2dp" style = "font-family: 'Montserrat'"">Advanced Settings</button>
+</div>
+<div id="myDIV">
+<div class="mdl-grid demo-content justify-center items-center">		
 <div class="mdl-card mdl-shadow--2dp mdl-card--horizontal mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
 		<form action="{{ url('/updateSocialSettings') }}" method="POST" class="pl4">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -77,7 +85,8 @@
 		</form>
 	</div>
 	</div>
-
+</div>
+</div>
 </main>
 
 @stop

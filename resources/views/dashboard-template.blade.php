@@ -32,8 +32,8 @@
 	</header>
 	<div class="demo-drawer mdl-layout__drawer">
 
-		<header class="demo-drawer-header tc">
-			<span>Observation Deck</span>
+		<header class="demo-drawer-header tc bg-gs-logo">
+			<span><img src ="https://pbs.twimg.com/profile_images/625821027117854720/QmOvuIA6.jpg" height ="152" width = "152"></span>
 		</header>
 
     <form id="logout-form" action="{{ url('/logout') }}" method="POST"
