@@ -24,16 +24,24 @@ class MyFacebookApi
         $json_url = $this->FbGraphHost . $pageId . '/?fields=fan_count&access_token=' 
         . $appid.'|'.$appsecret;
 
-        $json = file_get_contents($json_url);
-        $json_output = json_decode($json);
-
-        //Extract the likes count from the JSON object
-        if($json_output->fan_count){
-            return $likes = $json_output->fan_count;
-        }else{
-            return 0;
-        }
-
+        $ch = curl_init($json_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = '';
+        if( ($json = curl_exec($ch) ) === false){
+            throw new \Exception('Curl error: ' . curl_error($ch));
+        } else {
+            $json_output = json_decode($json);
+            if(isset($json_output->error)){
+                throw new \Exception($json);
+            } else {
+                        //Extract the likes count from the JSON object
+                if($json_output->fan_count){
+                    return $likes = $json_output->fan_count;
+                }else{
+                    return 0;
+                }
+            }
+        }  
     }
 
     /**
@@ -50,12 +58,12 @@ class MyFacebookApi
      */
     public function getFeedDataInDateRange($pageId, $since, $until)
     {
-        //Construct a Facebook URL
         $limit = 30;
         $offset = 0;
         
         $data_array = [];
         do{
+            //Construct a Facebook URL
             $json_url = $this->FbGraphHost . $pageId 
             . '/posts/?fields=permalink_url,shares,message,updated_time,reactions.summary(total_count),comments.summary(total_count)&since=' 
             . $since . '&until='. $until 
@@ -66,8 +74,6 @@ class MyFacebookApi
             // $json = file_get_contents($json_url);
             // $json_output = json_decode($json);
 
-            // TODO: change all code to curl
-            // using curl instead now
             $ch = curl_init($json_url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $json = '';
@@ -99,110 +105,14 @@ class MyFacebookApi
                         $data_to_add->comments = $post->comments->summary->total_count;
                         array_push($data_array, $data_to_add);
                     }
+                    // Change the data offset each time to keep getting data till
+                    // we reach the end.
                     $offset += 30;
                 }    
             }
         } while($json_output->data != [] );
 
         return json_encode($data_array);
-
-    }
-
-    /**
-     * Get a number of reactions and comments per post, with post times
-     * 
-     * URL Called: https://graph.facebook.com/{$pageId}/
-     * posts/?fields=message,updated_time,reactions.summary(total_count),
-     * comments.summary(total_count)&limit={$limit}&access_token={$appid}|{$appsecret}
-     *
-     * @return String in JSON format
-     */
-    public function getFeedData($pageId, $limit)
-    {
-        //Construct a Facebook URL
-        $json_url = $this->FbGraphHost . $pageId 
-        . '/posts/?fields=message,updated_time,reactions.summary(total_count),comments.summary(total_count)&limit='
-        . $limit . '&access_token=' . $this->appid.'|'.$this->appsecret;
-
-        $json = file_get_contents($json_url);
-        $json_output = json_decode($json);
-        $data_array = [];
-        if($json_output->data){
-            foreach ($json_output->data as $post){
-                $data_to_add = new \stdClass();
-                if(isset($post->message) && ($post->message!=null)){
-                    $data_to_add->message = $post->message;
-                } else {
-                    $data_to_add->message = "";
-                }
-                $data_to_add->time = $post->updated_time;
-                $data_to_add->reactions = $post->reactions->summary->total_count;
-                $data_to_add->comments = $post->comments->summary->total_count;
-                array_push($data_array, $data_to_add);
-            }
-        }
-
-        return json_encode($data_array);
-
-    }
-
-    /**
-     * Get a list of reaction per post in order of most recent.
-     *
-     * URL Called: https://graph.facebook.com/{$pageId}/
-     * feed/?fields=reactions.summary(total_count)&limit=2&
-     * access_token={$appid}|{$appsecret}
-     *
-     * @return String EX: 0,2,3,4
-     */
-    public function getNumberOfReactionsPerPost($pageId, $limit)
-    {
-        //Construct a Facebook URL
-        $json_url = $this->FbGraphHost . $pageId . '/feed/?fields=reactions.summary(total_count)&limit=' 
-        . $limit . '&access_token=' . $this->appid.'|'.$this->appsecret;
-
-        $json = file_get_contents($json_url);
-        $json_output = json_decode($json);
-        $total_reactions_array = [];
-        if($json_output->data){
-
-            foreach ($json_output->data as $post){
-                $reaction_count = $post->reactions->summary->total_count;
-                array_push($total_reactions_array, $reaction_count);
-            }
-
-        }
-        return implode(",", $total_reactions_array);
-
-    }
-
-    /**
-     * Get a list of comments per post in order of most recent.
-     *
-     * URL Called: https://graph.facebook.com/{$pageId}/
-     * feed/?fields=comments.summary(total_count)&limit=2&
-     * access_token={$appid}|{$appsecret}
-     *
-     * @return String EX: 0,2,3,4
-     */
-    public function getNumberOfCommentsPerPost($pageId, $limit)
-    {
-        //Construct a Facebook URL
-        $json_url = $this->FbGraphHost . $pageId . '/feed/?fields=comments.summary(total_count)&limit=' 
-        . $limit . '&access_token=' . $this->appid.'|'.$this->appsecret;
-
-        $json = file_get_contents($json_url);
-        $json_output = json_decode($json);
-        $total_comments_array = [];
-        if($json_output->data){
-
-            foreach ($json_output->data as $post){
-                $comments_count = $post->comments->summary->total_count;
-                array_push($total_comments_array, $comments_count);
-            }
-
-        }
-        return implode(",", $total_comments_array);
 
     }
 
