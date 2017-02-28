@@ -53,14 +53,15 @@ function getStartDate(daysPassed){
   return today;
 }
 
+// Loader Functions
 function startFBLoader(){
   var fbLoader = document.querySelector('.fb-loader');
-  console.log({fbCard}, fbCard.clientWidth, fbLoader.clientWidth);
-  fbLoader.setAttribute('style', 'width:400px;');
+  var loaderWidth = fbCard.clientWidth;
+  var loaderHeight = fbCard.clientHeight;
+  fbLoader.setAttribute('style', `height:${loaderHeight}px;width:${loaderWidth}px;`);
   fbLoader.classList.remove('dn');
   fbLoader.classList.add('flex');
 }
-
 function endFBLoader(){
   var fbLoader = document.querySelector('.fb-loader');
   fbLoader.classList.remove('flex');
@@ -93,8 +94,7 @@ function getFBTotalPosts(data){
 
 // Get the Facebook data
 function getFBData(start, end){
-  // startFBLoader();
-  // setTimeout(endFBLoader, 3000);
+  startFBLoader();
   let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}`
   return fetch(myURL)
     .then(resp => {
@@ -111,6 +111,7 @@ function getFBData(start, end){
 			fbComments.innerHTML = fbTotalComments;
 			fbPosts.innerHTML = fbTotalPosts;
 			fbTimeFrame.innerHTML = dayCount;
+      endFBLoader();
     })
     .catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
