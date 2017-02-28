@@ -53,6 +53,20 @@ function getStartDate(daysPassed){
   return today;
 }
 
+function startFBLoader(){
+  var fbLoader = document.querySelector('.fb-loader');
+  console.log({fbCard}, fbCard.clientWidth, fbLoader.clientWidth);
+  fbLoader.setAttribute('style', 'width:400px;');
+  fbLoader.classList.remove('dn');
+  fbLoader.classList.add('flex');
+}
+
+function endFBLoader(){
+  var fbLoader = document.querySelector('.fb-loader');
+  fbLoader.classList.remove('flex');
+  fbLoader.classList.add('dn');
+}
+
 // Facebook specific data manipulation functions
 function getFBTotalReactions(data){
 	var totalReactions = data.map(post => {
@@ -79,6 +93,8 @@ function getFBTotalPosts(data){
 
 // Get the Facebook data
 function getFBData(start, end){
+  // startFBLoader();
+  // setTimeout(endFBLoader, 3000);
   let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}`
   return fetch(myURL)
     .then(resp => {

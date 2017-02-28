@@ -50,7 +50,7 @@ function getStartDate(daysPassed){
   return today;
 }
 
-function getData(start, end, filter){
+function getData(start, end){
   let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}`
   return fetch(myURL)
     .then(resp => {
@@ -60,22 +60,14 @@ function getData(start, end, filter){
       throw new Error('Network response was not ok.');
     })
     .then(value => {
-      if(filter == "comments"){
-        let allData = filterForAll(value);
-        let reactions = filterForReactions(value);
-        let comments = filterForComments(value);
-        let shares = filterForShares(value);
-        drawMainChart(allData);
-        drawSubChartOne(reactions);
-        drawSubChartTwo(comments);
-        drawSubChartThree(shares);
-      } else if(filter == "reactions"){
-        let reactions = filterForReactions(value);
-        drawLineColors(reactions);
-      } else if(filter == "shares"){
-        let shares = filterForComments(value);
-        drawLineColors(shares);
-      }
+      let allData = filterForAll(value);
+      let reactions = filterForReactions(value);
+      let comments = filterForComments(value);
+      let shares = filterForShares(value);
+      drawMainChart(allData);
+      drawSubChartOne(reactions);
+      drawSubChartTwo(comments);
+      drawSubChartThree(shares);
     })
     .catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
@@ -311,5 +303,5 @@ function drawSubChartThree(chartData) {
 dayButtons.forEach(button => button.addEventListener('click', (e) => {
   let startDate = getStartDate(e.target.dataset.days);
   let endDate = getTodaysDate();
-  getData(startDate, endDate, "comments");
+  getData(startDate, endDate);
 }));
