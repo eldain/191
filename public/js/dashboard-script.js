@@ -107,8 +107,8 @@ function getFBData(start, end){
 			var fbTotalReactions = getFBTotalReactions(value);
 			var fbTotalComments = getFBTotalComments(value);
 			var fbTotalPosts = getFBTotalPosts(value);
- 			fbReactions.innerHTML = fbTotalReactions;
-			fbComments.innerHTML = fbTotalComments;
+ 			fbReactions.innerHTML = numberWithCommas(fbTotalReactions);
+			fbComments.innerHTML = numberWithCommas(fbTotalComments);
 			fbPosts.innerHTML = fbTotalPosts;
 			fbTimeFrame.innerHTML = dayCount;
       endFBLoader();
