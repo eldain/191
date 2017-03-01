@@ -63,6 +63,13 @@ h2{
   font-size: 30px;
 }
 
+h3{
+  font-family: 'Montserrat', sans-serif;
+  color:#BEA761;
+  font-size: 20px;
+  text-align: center;
+}
+
 .button-holder{
   top: 4vh;
   left: 5vh;

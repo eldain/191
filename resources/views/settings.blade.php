@@ -12,9 +12,9 @@
 		@foreach (['error', 'success'] as $msg)
 			@if(Session::has('alert-' . $msg))
 			<div class="mdl-grid demo-content justify-center items-center">
-				<div class="mdl-card mdl-shadow--2dp mdl-card--horizontal mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing ">
+				<div class="mdl-shadow--2dp mdl-card--horizontal mdl-grid mdl-grid--no-spacing bg-dark-gray">
 
-				<h2 class="off-white">{{ Session::get('alert-' . $msg) }}</h2>
+				<h3 class="off-white">{{ Session::get('alert-' . $msg) }}</h3>
 				</div>
 			</div>
 			@endif

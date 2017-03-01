@@ -45,8 +45,8 @@ class UserController extends Controller
             $fb = new MyFacebookApi();
             $fb->getPageLikeCount($user->facebook, $user->fb_api_key, $user->fb_api_secret);
         } catch (\Exception $e) {
-            $request->session()->flash('alert-error', 'Facebook Page name: ' . $user->facebook 
-                . ' does exists. Changes not saved');
+            $request->session()->flash('alert-error', 'Facebook Page Name: ' . $user->facebook 
+                . ' does exists. Changes not saved.');
             return redirect('settings');
         }
 
@@ -56,8 +56,8 @@ class UserController extends Controller
             $instagram = new MyInstagramApi();
             $instagram->getInstaIdByUsername($user->instagram);
         } catch (\Exception $e) {
-            $request->session()->flash('alert-error', 'Instagram username: ' . $user->instagram
-                . ' does exists. Changes not saved');
+            $request->session()->flash('alert-error', 'Instagram Username: ' . $user->instagram
+                . ' does exists. Changes not saved.');
             return redirect('settings');
         }
 
@@ -68,7 +68,7 @@ class UserController extends Controller
             $twitter->getLastTweet($user->twitter);
         } catch (\Exception $e) {
             $request->session()->flash('alert-error', 'Twitter Handle: ' . $user->twitter 
-                . ' does exists. Changes not saved');
+                . ' does exists. Changes not saved.');
             return redirect('settings');
         }
         $user->save();
@@ -92,11 +92,11 @@ class UserController extends Controller
             $fb->getPageLikeCount($user->facebook, $user->fb_api_key, $user->fb_api_secret);
         } catch (\Exception $e) {
             $request->session()->flash('alert-error', 'Facebook app key: ' . $user->fb_api_key .
-                ' and secret key: ' . $user->fb_api_secret . ' do not exist. Changes not saved');
+                ' and secret key: ' . $user->fb_api_secret . ' do not exist. Changes not saved.');
             return redirect('settings');
         }
         $user->save();
-        $request->session()->flash('alert-success', 'Api keys updated!');
+        $request->session()->flash('alert-success', 'API keys updated!');
         return redirect('settings');
     }
 }
