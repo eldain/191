@@ -27,7 +27,7 @@ class MyFacebookApi
         $ch = curl_init($json_url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = '';
-        if( ($json = curl_exec($ch) ) === false){
+        if (($json = curl_exec($ch) ) === false){
             throw new \Exception('Curl error: ' . curl_error($ch));
         } else {
             $json_output = json_decode($json);
@@ -77,12 +77,9 @@ class MyFacebookApi
             $ch = curl_init($json_url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $json = '';
-            if( ($json = curl_exec($ch) ) === false)
-            {
+            if (($json = curl_exec($ch) ) === false) {
                 throw new \Exception('Curl error: ' . curl_error($ch));
-            }
-            else
-            {
+            } else {
                 $json_output = json_decode($json);
                 if(isset($json_output->error)){
                     throw new \Exception($json);

@@ -52,6 +52,14 @@ class UserController extends Controller
 
         // Instagram 
         $user->instagram = $request->input('instagram');
+        try{
+            $instagram = new MyInstagramApi();
+            $instagram->getInstaIdByUsername($user->instagram);
+        } catch (\Exception $e) {
+            $request->session()->flash('alert-error', 'Instagram username: ' . $user->instagram
+                . ' does exists. Changes not saved');
+            return redirect('settings');
+        }
 
         // Twitter
         $user->twitter = $request->input('twitter');
