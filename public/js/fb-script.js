@@ -50,7 +50,24 @@ function getStartDate(daysPassed){
   return today;
 }
 
+// Loader Functions
+function startChartLoader(){
+  var loaderSize = document.querySelector(".mdl-layout__content.content-background")
+  var chartLoader = document.querySelector('.chart-loader');
+  var loaderWidth = loaderSize.clientWidth;
+  var loaderHeight = loaderSize.clientHeight;
+  chartLoader.setAttribute('style', `height:${loaderHeight}px;width:${loaderWidth}px;`);
+  chartLoader.classList.remove('dn');
+  chartLoader.classList.add('flex');
+}
+function endChartLoader(){
+  var chartLoader = document.querySelector('.chart-loader');
+  chartLoader.classList.remove('flex');
+  chartLoader.classList.add('dn');
+}
+
 function getData(start, end){
+  startChartLoader();
   let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}`
   return fetch(myURL)
     .then(resp => {
@@ -68,6 +85,7 @@ function getData(start, end){
       drawSubChartOne(reactions);
       drawSubChartTwo(comments);
       drawSubChartThree(shares);
+      endChartLoader();
     })
     .catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
