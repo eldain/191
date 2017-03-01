@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use App\MyFacebookApi;
+use App\MyTwitterApi;
+use App\MyInstagramApi;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -47,8 +49,20 @@ class UserController extends Controller
                 . ' does exists. Changes not saved');
             return redirect('settings');
         }
+
+        // Instagram 
         $user->instagram = $request->input('instagram');
+
+        // Twitter
         $user->twitter = $request->input('twitter');
+        try{
+            $twitter = new MyTwitterApi();
+            $twitter->getLastTweet($user->twitter);
+        } catch (\Exception $e) {
+            $request->session()->flash('alert-error', 'Twitter Handle: ' . $user->twitter 
+                . ' does exists. Changes not saved');
+            return redirect('settings');
+        }
         $user->save();
         $request->session()->flash('alert-success', 'Facebook, Instagram, and Twitter updated succesfully!');
         return redirect('settings');
