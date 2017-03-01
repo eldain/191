@@ -137,3 +137,9 @@ function getFBPageLikes(){
 // Actually call the functions
 getFBData(getStartDate(dayCount), getTodaysDate());
 getFBPageLikes();
+
+// Repeat for "Realtime Data"
+setInterval(() => {
+  getFBData(getStartDate(dayCount), getTodaysDate());
+  getFBPageLikes();
+}, 60000);

@@ -5,6 +5,7 @@ const firstSubChart = document.querySelector('.sub-chart-one');
 const secondSubChart = document.querySelector('.sub-chart-two');
 const thirdSubChart = document.querySelector('.sub-chart-three');
 const dayButtons = document.querySelectorAll(".button-holder button");
+let dayRangeDefault = 30;
 
 /*
 - get data
@@ -143,9 +144,9 @@ function getPageLikes(){
 
 google.charts.load('current', {packages: ['corechart', 'line']});
 google.charts.setOnLoadCallback(() => {
-  let startDate = getStartDate(10);
+  let startDate = getStartDate(dayRangeDefault);
   let endDate = getTodaysDate();
-  getData(startDate, endDate, "comments");
+  getData(startDate, endDate);
 });
 
 function drawMainChart(chartData) {
@@ -325,3 +326,10 @@ dayButtons.forEach(button => button.addEventListener('click', (e) => {
   let endDate = getTodaysDate();
   getData(startDate, endDate);
 }));
+
+// Repeat for "Realtime Data"
+setInterval(() => {
+  let startDate = getStartDate(dayRangeDefault);
+  let endDate = getTodaysDate();
+  getData(startDate, endDate);
+}, 60000);
