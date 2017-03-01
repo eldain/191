@@ -34,9 +34,13 @@ class MyTwitterApi
                 ->performRequest();
 
 
-        $json_a=json_decode($response,true);
-        $tweet = $json_a[0]['text'];
-        return $tweet;
+        $json_a = json_decode($response);
+        if(isset($json_a->errors)){
+            throw new \Exception($response);
+        } else {
+            $tweet = $json_a[0]->text;
+            return $tweet;
+        }
     }
 
     /**
@@ -55,17 +59,21 @@ class MyTwitterApi
                 ->buildOauth($url, $requestMethod)
                 ->performRequest();
 
-        $tweets = json_decode($response,true);
-        $data_array = [];
-        for( $i = 0; $i < count($tweets); $i++ ) {
-            $data_to_add = new \stdClass();
-            $data_to_add->text = $tweets[$i]['text'];
-            $data_to_add->created_at = $tweets[$i]['created_at'];
-            $data_to_add->favorite_count = $tweets[$i]['favorite_count'];
-            $data_to_add->retweet_count = $tweets[$i]['retweet_count'];
-            array_push($data_array, $data_to_add);
+        $tweets = json_decode($response);
+        if(isset($tweets->errors)){
+            throw new \Exception($response);
+        } else {
+            $data_array = [];
+            foreach ($tweets as $post){
+                $data_to_add = new \stdClass();
+                $data_to_add->text = $post->text;
+                $data_to_add->created_at = $post->created_at;
+                $data_to_add->favorite_count = $post->favorite_count;
+                $data_to_add->retweet_count = $post->retweet_count;
+                array_push($data_array, $data_to_add);
+            }
+            return json_encode($data_array);
         }
-        return json_encode($data_array);
     }
 
     /**
@@ -84,9 +92,13 @@ class MyTwitterApi
                 ->performRequest();
 
 
-        $json_a=json_decode($response,true);
-        $retweets = $json_a[0]['retweet_count'];
-        return $retweets;
+        $json_a=json_decode($response);
+        if(isset($json_a->errors)){
+            throw new \Exception($response);
+        } else {
+            $retweets = $json_a[0]->retweet_count;
+            return $retweets;
+        }
     }
 
     /**
@@ -105,9 +117,13 @@ class MyTwitterApi
                 ->performRequest();
 
 
-        $json_a=json_decode($response,true);
-        $followers_count = $json_a[0]['user']['followers_count'];
-        return $followers_count;
+        $json_a = json_decode($response);
+        if(isset($json_a->errors)){
+            throw new \Exception($response);
+        } else {
+            $followers_count = $json_a[0]->user->followers_count;
+            return $followers_count;
+        }
     }
 
     /**
@@ -126,14 +142,18 @@ class MyTwitterApi
                 ->performRequest();
 
 
-        $json_a=json_decode($response,true);
-        $twitter_id = $json_a[0]['user']['id_str'];
-        $twitter_count_url = 'http://api.twittercounter.com/?twitter_id=' 
-        . $twitter_id . '&apikey=' . $this->twitterCountApiKey;
-        
-        $json_twitter_count = json_decode(file_get_contents($twitter_count_url), true);
-        $followersperdate_array = $json_twitter_count['followersperdate'];
-        return json_encode($followersperdate_array);
+        $json_a = json_decode($response);
+        if(isset($json_a->errors)){
+            throw new \Exception($response);
+        } else {
+            $twitter_id = $json_a[0]->user->id_str;
+            $twitter_count_url = 'http://api.twittercounter.com/?twitter_id=' 
+            . $twitter_id . '&apikey=' . $this->twitterCountApiKey;
+            
+            $json_twitter_count = json_decode(file_get_contents($twitter_count_url));
+            $followersperdate_array = $json_twitter_count->followersperdate;
+            return json_encode($followersperdate_array);
+        }
     }
 
 }
