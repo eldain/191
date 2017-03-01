@@ -301,6 +301,8 @@ function drawSubChartThree(chartData) {
 }
 
 dayButtons.forEach(button => button.addEventListener('click', (e) => {
+  dayButtons.forEach(button => button.classList.remove("bg-gold"));
+  button.classList.add("bg-gold");
   let startDate = getStartDate(e.target.dataset.days);
   let endDate = getTodaysDate();
   getData(startDate, endDate);
