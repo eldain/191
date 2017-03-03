@@ -10,7 +10,7 @@ class TwitterController extends Controller
 
     /**
      * Get the most recent tweets
-     * Example url: /twGetTweets?user={username}
+     * Example url: /twGetTweets?user={username}&until={date}
      * @return Response
      */
     public function getTweets(Request $request)
