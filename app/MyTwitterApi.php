@@ -44,36 +44,46 @@ class MyTwitterApi
     }
 
     /**
-     * Get most recent tweets
-     * Date: YYYY-MM-DD
+     * Get most all tweets until the specified until date
      *
      * @return String
      */
-    public function getTweets($twitterUserName)
+    public function getTweets($twitterUserName,  $until)
     {
-        $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-        $getfield = '?&screen_name=' . $twitterUserName . '&count=200';
-        $requestMethod = 'GET';
+        $until_date = new \DateTime($until);
+        $date;
+        $data_array = [];
+        $page = 1;
+        do {
+            $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+            $getfield = '?&screen_name=' . $twitterUserName . '&count=200&page=' . $page;
+            $requestMethod = 'GET';
 
-        $response = $this->twitter->setGetfield($getfield)
-                ->buildOauth($url, $requestMethod)
-                ->performRequest();
+            $response = $this->twitter->setGetfield($getfield)
+                    ->buildOauth($url, $requestMethod)
+                    ->performRequest();
 
-        $tweets = json_decode($response);
-        if(isset($tweets->errors)){
-            throw new \Exception($response);
-        } else {
-            $data_array = [];
-            foreach ($tweets as $post){
-                $data_to_add = new \stdClass();
-                $data_to_add->text = $post->text;
-                $data_to_add->created_at = $post->created_at;
-                $data_to_add->favorite_count = $post->favorite_count;
-                $data_to_add->retweet_count = $post->retweet_count;
-                array_push($data_array, $data_to_add);
+            $tweets = json_decode($response);
+            if(isset($tweets->errors)){
+                throw new \Exception($response);
+            } else {
+                foreach ($tweets as $post){
+                    $data_to_add = new \stdClass();
+                    $data_to_add->text = $post->text;
+                    $data_to_add->created_at = $post->created_at;
+                    $data_to_add->favorite_count = $post->favorite_count;
+                    $data_to_add->retweet_count = $post->retweet_count;
+                    $date = new \DateTime($data_to_add->created_at);
+                    if ($date < $until_date){
+                        break;
+                    } else {
+                        array_push($data_array, $data_to_add);
+                    }
+                }
             }
-            return json_encode($data_array);
-        }
+            $page += 1;
+        } while ($date > $until_date);
+        return json_encode($data_array);
     }
 
     /**

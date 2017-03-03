@@ -21,8 +21,9 @@ class TwitterController extends Controller
         } else if ($user == 'null') {
             return 'twitter username not set';
         } else {
+            $until = $request->input('until');
             $twitter = new MyTwitterApi();
-            return $twitter->getTweets($user);
+            return $twitter->getTweets($user, $until);
         }
     }
 

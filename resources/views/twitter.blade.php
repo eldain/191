@@ -6,7 +6,7 @@
 @stop
 
 @section('dashboard-title')
-Facebook Updates ({{ Auth::user()->twitter }})
+Twitter Updates ({{ Auth::user()->twitter }})
 @stop
 @section('dashboard-body')
 
