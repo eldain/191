@@ -40,49 +40,66 @@ class MyInstagramApi
     }
 
     /**
-     * The most recent posts by user.
+     * Get most all post until the specified until date
      * https://api.instagram.com/v1/users/{user-id}/media/
      * recent/?access_token=ACCESS-TOKEN
      *
      * @return String
      */
-    public function getRecentPosts($user) {
+    public function getRecentPosts($user, $until) {
         $insta_id = $this->getInstaIdByUsername($user);
-        // TODO: Figure out pagnation
 
-        $json_url = $this->instagramHost . 'users/' . $insta_id 
-            . '/media/recent/?count=100&access_token=' . $this->access_token;
+        $until_date = new \DateTime($until);
+        $date;
+        $data_array = [];
+        $next_call = [];
+        do {
+            $json_url = $this->instagramHost . 'users/' . $insta_id 
+                . '/media/recent/?count=100&access_token=' . $this->access_token;
 
-        $ch = curl_init($json_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = '';
-        if (($json = curl_exec($ch) ) === false){
-            throw new \Exception('Curl error: ' . curl_error($ch));
-        } else {
-            $json_output = json_decode($json);
-            if(isset($json_output->meta->error_type) || $json_output->data == []) {
-                throw new \Exception($json);
-            } else {
-                $data_array = [];
-                foreach ($json_output->data as $post){
-                    $data_to_add = new \stdClass();
-                    if(isset($post->comments) && ($post->comments!=null)){
-                        $data_to_add->comments_count = $post->comments->count;
-                    } else {
-                        $data_to_add->comments_count = 0;
-                    }
-                    if(isset($post->caption->text) && ($post->caption->text!=null)){
-                        $data_to_add->text = $post->caption->text;
-                    } else {
-                        $data_to_add->text = "";
-                    }
-                    $data_to_add->time = $post->created_time;
-                    $data_to_add->likes = $post->likes->count;
-                    array_push($data_array, $data_to_add);
-                }
-                return json_encode($data_array);
+            if (!empty((array) $next_call)) {
+                return "here";
+                $json_url = $next_call;
             }
-        }
+
+            $ch = curl_init($json_url);
+
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $json = '';
+            if (($json = curl_exec($ch) ) === false){
+                throw new \Exception('Curl error: ' . curl_error($ch));
+            } else {
+                $json_output = json_decode($json);
+                if(isset($json_output->meta->error_type) || $json_output->data == []) {
+                    throw new \Exception($json);
+                } else {
+                    $next_call = $json_output->pagination;
+                    foreach ($json_output->data as $post){
+                        $data_to_add = new \stdClass();
+                        if(isset($post->comments) && ($post->comments!=null)){
+                            $data_to_add->comments_count = $post->comments->count;
+                        } else {
+                            $data_to_add->comments_count = 0;
+                        }
+                        if(isset($post->caption->text) && ($post->caption->text!=null)){
+                            $data_to_add->text = $post->caption->text;
+                        } else {
+                            $data_to_add->text = "";
+                        }
+                        $data_to_add->likes = $post->likes->count;
+                        $date = new \DateTime();
+                        $date->setTimestamp($post->created_time);
+                        $data_to_add->time = $date->getTimestamp();
+                        if ($date < $until_date){
+                            break;
+                        } else {
+                            array_push($data_array, $data_to_add);
+                        }
+                    }
+                }
+            } 
+        } while ($date > $until_date && !empty((array) $next_call));
+        return json_encode($data_array);
     }
 
     /**

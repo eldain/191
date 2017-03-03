@@ -27,7 +27,7 @@ class InstagramController extends Controller
 
     /**
      * Get the most recent posts.
-     * Example url: /inGetRecentPosts?user={username}
+     * Example url: /inGetRecentPosts?user={username}&until={date}
      * @return Response
      */
     public function getRecentPosts(Request $request)
@@ -38,8 +38,9 @@ class InstagramController extends Controller
         } else if ($user == 'null') {
             return 'instagram username not set';
         } else {
+            $until = $request->input('until');
             $instagram = new MyInstagramApi();
-            return $instagram->getRecentPosts($user);
+            return $instagram->getRecentPosts($user, $until);
         }
     }
 }

@@ -1,10 +1,11 @@
-// Remember that userTwitter is set on dashboard page
+// Remember that userInstagram is set on dashboard page
 
 const mainChart = document.querySelector('.main-chart');
 const firstSubChart = document.querySelector('.sub-chart-one');
 const secondSubChart = document.querySelector('.sub-chart-two');
 const thirdSubChart = document.querySelector('.sub-chart-three');
 const dayButtons = document.querySelectorAll(".button-holder button");
+let dayRangeDefault = 30;
 
 /*
 - get data
@@ -50,8 +51,25 @@ function getStartDate(daysPassed){
   return today;
 }
 
+// Loader Functions
+function startChartLoader(){
+  var loaderSize = document.querySelector(".mdl-layout__content.content-background")
+  var chartLoader = document.querySelector('.chart-loader');
+  var loaderWidth = loaderSize.clientWidth;
+  var loaderHeight = loaderSize.clientHeight;
+  chartLoader.setAttribute('style', `height:${loaderHeight}px;width:${loaderWidth}px;`);
+  chartLoader.classList.remove('dn');
+  chartLoader.classList.add('flex');
+}
+function endChartLoader(){
+  var chartLoader = document.querySelector('.chart-loader');
+  chartLoader.classList.remove('flex');
+  chartLoader.classList.add('dn');
+}
+
 function getData(start, end){
-  let myURL = `/twGetTweets?user=${userTwitter}&since=${start}&until=${end}`
+  startChartLoader();
+  let myURL = `/inGetRecentPosts?user=${userInstagram}&since=${start}&until=2-2-2017`
   return fetch(myURL)
     .then(resp => {
       if(resp.ok){
@@ -60,66 +78,69 @@ function getData(start, end){
       throw new Error('Network response was not ok.');
     })
     .then(value => {
+      console.log(value);
       let allData = filterForAll(value);
-      let favorites = filterForFavorites(value);
-      let retweets = filterForRetweets(value);
+      let likes = filterForLikes(value);
+      let comments = filterForComments(value);
       drawMainChart(allData);
-      drawSubChartOne(favorites);
-      drawSubChartTwo(retweets);
+      drawSubChartOne(likes);
+      drawSubChartTwo(comments);
+      endChartLoader();
     })
     .catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
     });
 }
 
-function filterForRetweets(data){
-  let retweetArray = data.map(post => {
-    let date = new Date(post.created_at);
+function filterForComments(data){
+  let commentArray = data.map(post => {
+    let date = new Date(post.time);
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    return [`${month}/${day}`, post.retweet_count]
+    return [`${month}/${day}`, post.comments_count]
   });
-  return retweetArray.reverse();
+  return commentArray.reverse();
 }
 
-function filterForFavorites(data){
-  let favoritesArray = data.map(post => {
-    let date = new Date(post.created_at);
+function filterForLikes(data){
+  let reactionsArray = data.map(post => {
+    let date = new Date(post.time);
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    return [`${month}/${day}`, post.favorite_count]
+    return [`${month}/${day}`, post.likes]
   });
-  return favoritesArray.reverse();
+  return reactionsArray.reverse();
 }
 
 function filterForAll(data){
   let allArray = data.map(post => {
-    let date = new Date(post.created_at);
+    let date = new Date(post.time);
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    return [`${month}/${day}`, post.favorite_count, post.retweet_count]
+    return [`${month}/${day}`, post.comments_count, post.likes]
   });
   return allArray.reverse();
 }
 
+
 google.charts.load('current', {packages: ['corechart', 'line']});
 google.charts.setOnLoadCallback(() => {
-  let startDate = getStartDate(10);
+  let startDate = getStartDate(dayRangeDefault);
   let endDate = getTodaysDate();
-  getData(startDate, endDate, "favorites");
+  getData(startDate, endDate);
 });
 
 function drawMainChart(chartData) {
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Posts');
-      data.addColumn('number', 'Favorites');
-      data.addColumn('number', 'Retweet');
+      data.addColumn('number', 'Comments');
+      data.addColumn('number', 'Likes');
 
       // addRows format [[a,b],[c,d],...]
       data.addRows(chartData);
 
       var options = {
-        'title': "Overall Twitter Trends ",
+        'title': "Overall Instagram Trends ",
         titleTextStyle: {
           color: '#fff',
           fontSize: 20
@@ -161,7 +182,7 @@ function drawSubChartOne(chartData) {
   data.addRows(chartData);
 
   var options = {
-    'title': "Favorites",
+    'title': "Likes",
     titleTextStyle: {
       color: '#fff',
       fontSize: 16
@@ -175,7 +196,7 @@ function drawSubChartOne(chartData) {
       titleTextStyle: {color: '#FFF'}
     },
     vAxis: {
-      title: 'Retweets',
+      title: 'Reactions',
       baselineColor: '#FFF',
       gridlineColor: '#FFF',
       textStyle:{color: '#FFF'},
@@ -203,7 +224,7 @@ function drawSubChartTwo(chartData) {
   data.addRows(chartData);
 
   var options = {
-    'title': "Retweets",
+    'title': "Comments",
     titleTextStyle: {
       color: '#fff',
       fontSize: 16
@@ -217,7 +238,7 @@ function drawSubChartTwo(chartData) {
       titleTextStyle: {color: '#FFF'}
     },
     vAxis: {
-      title: 'Favorites',
+      title: 'Comments',
       baselineColor: '#FFF',
       gridlineColor: '#FFF',
       textStyle:{color: '#FFF'},
@@ -245,7 +266,7 @@ function drawSubChartThree(chartData) {
   data.addRows(chartData);
 
   var options = {
-    'title': "Followers",
+    'title': "Shares",
     titleTextStyle: {
       color: '#fff',
       fontSize: 16
@@ -279,7 +300,16 @@ function drawSubChartThree(chartData) {
 }
 
 dayButtons.forEach(button => button.addEventListener('click', (e) => {
+  dayButtons.forEach(button => button.classList.remove("bg-gold"));
+  button.classList.add("bg-gold");
   let startDate = getStartDate(e.target.dataset.days);
   let endDate = getTodaysDate();
   getData(startDate, endDate);
 }));
+
+// Repeat for "Realtime Data"
+setInterval(() => {
+  let startDate = getStartDate(dayRangeDefault);
+  let endDate = getTodaysDate();
+  getData(startDate, endDate);
+}, 60000);
