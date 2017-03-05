@@ -1,5 +1,6 @@
 // Remember that userFB is set on dashboard page
 
+// Variables
 const mainChart = document.querySelector('.main-chart');
 const firstSubChart = document.querySelector('.sub-chart-one');
 const secondSubChart = document.querySelector('.sub-chart-two');
@@ -8,12 +9,14 @@ const dayButtons = document.querySelectorAll(".button-holder button");
 let dayRangeDefault = 30;
 
 /*
+Process:
 - get data
 - filter data for specific chart
 - pass filtered data to google chart which...
 - update/render panels with charts
 */
 
+// Utility Functions
 function getTodaysDate(){
   var today = new Date();
   var dd = today.getDate();
@@ -31,7 +34,6 @@ function getTodaysDate(){
   today = mm+'/'+dd+'/'+yyyy;
   return today;
 }
-
 function getStartDate(daysPassed){
   var today = new Date();
   today.setDate(today.getDate() - daysPassed);
@@ -67,6 +69,51 @@ function endChartLoader(){
   chartLoader.classList.add('dn');
 }
 
+// Filter the data for specific charts, etc
+function filterForComments(data){
+  let commentArray = data.map(post => {
+    let date = new Date(post.time);
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return [`${month}/${day}`, post.comments]
+  });
+  return commentArray.reverse();
+}
+function filterForReactions(data){
+  let reactionsArray = data.map(post => {
+    let date = new Date(post.time);
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return [`${month}/${day}`, post.reactions]
+  });
+  return reactionsArray.reverse();
+}
+function filterForShares(data){
+  let sharesArray = data.map(post => {
+    let date = new Date(post.time);
+    let month = date.getMonth();
+    let day = date.getDate();
+    return [`${month}/${day}`, post.shares_count]
+  });
+  return sharesArray.reverse();
+}
+function filterForAll(data){
+  let allArray = data.map(post => {
+    let date = new Date(post.time);
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return [`${month}/${day}`, post.reactions, post.comments, post.shares_count]
+  });
+  return allArray.reverse();
+}
+function filterforURLS(data){
+  let urlArray = data.map(post => {
+    return post.url
+  });
+  return urlArray.reverse();
+}
+
+// Get the data
 function getData(start, end){
   startChartLoader();
   let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}`
@@ -82,7 +129,8 @@ function getData(start, end){
       let reactions = filterForReactions(value);
       let comments = filterForComments(value);
       let shares = filterForShares(value);
-      drawMainChart(allData, value);
+      let urls = filterforURLS(value);
+      drawMainChart(allData, urls);
       drawSubChartOne(reactions);
       drawSubChartTwo(comments);
       drawSubChartThree(shares);
@@ -92,47 +140,6 @@ function getData(start, end){
       console.log('There has been a problem with your fetch operation: ' + error.message);
     });
 }
-
-function filterForComments(data){
-  let commentArray = data.map(post => {
-    let date = new Date(post.time);
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    return [`${month}/${day}`, post.comments]
-  });
-  return commentArray.reverse();
-}
-
-function filterForReactions(data){
-  let reactionsArray = data.map(post => {
-    let date = new Date(post.time);
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    return [`${month}/${day}`, post.reactions]
-  });
-  return reactionsArray.reverse();
-}
-
-function filterForShares(data){
-  let sharesArray = data.map(post => {
-    let date = new Date(post.time);
-    let month = date.getMonth();
-    let day = date.getDate();
-    return [`${month}/${day}`, post.shares_count]
-  });
-  return sharesArray.reverse();
-}
-
-function filterForAll(data){
-  let allArray = data.map(post => {
-    let date = new Date(post.time);
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    return [`${month}/${day}`, post.reactions, post.comments, post.shares_count]
-  });
-  return allArray.reverse();
-}
-
 function getPageLikes(){
   let myURL = `/fbPageLikeCount?user=${userFB}&fbApiKey=${fbApiKey}&fbApiSecret=${fbApiSecret}`;
   fetch(myURL)
@@ -142,6 +149,7 @@ function getPageLikes(){
     });
 }
 
+// Load Google Charts and Do Initial Chart Rendering
 google.charts.load('current', {packages: ['corechart', 'line']});
 google.charts.setOnLoadCallback(() => {
   let startDate = getStartDate(dayRangeDefault);
@@ -149,15 +157,10 @@ google.charts.setOnLoadCallback(() => {
   getData(startDate, endDate);
 });
 
-function drawMainChart(chartData, allData) {
+// Chart Drawing Functions
+function drawMainChart(chartData, urls) {
       var data = new google.visualization.DataTable();
-      let urlArray = allData.map(post => {
-        let date = new Date(post.time);
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        return [post.url]
-      });
-      urlArray.reverse();
+
       data.addColumn('string', 'Posts');
       data.addColumn('number', 'Reactions');
       data.addColumn('number', 'Comments');
@@ -203,12 +206,10 @@ function drawMainChart(chartData, allData) {
         // grab a few details before redirecting
         var selection = chart.getSelection();
         var row = selection[0].row;
-        var url = urlArray[row];
+        var url = urls[row];
         location.href = url;
       });
-
 }
-
 function drawSubChartOne(chartData) {
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Posts');
@@ -250,7 +251,6 @@ function drawSubChartOne(chartData) {
   var chart = new google.visualization.LineChart(firstSubChart);
   chart.draw(data, options);
 }
-
 function drawSubChartTwo(chartData) {
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Posts');
@@ -292,7 +292,6 @@ function drawSubChartTwo(chartData) {
   var chart = new google.visualization.LineChart(secondSubChart);
   chart.draw(data, options);
 }
-
 function drawSubChartThree(chartData) {
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Posts');
@@ -335,6 +334,7 @@ function drawSubChartThree(chartData) {
   chart.draw(data, options);
 }
 
+// Event Listeners
 dayButtons.forEach(button => button.addEventListener('click', (e) => {
   dayButtons.forEach(button => button.classList.remove("bg-gold"));
   button.classList.add("bg-gold");
