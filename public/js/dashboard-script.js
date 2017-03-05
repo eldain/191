@@ -27,7 +27,7 @@ twitterCard.addEventListener("click", () => {
   window.location.href = '/twitter';
 })
 igCard.addEventListener("click", () => {
-  window.location.href = '/twitter';
+  window.location.href = '/instagram';
 })
 
 // Time frame... could eventually have this set in settings page, using PHP to retrieve?
