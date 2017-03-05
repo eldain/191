@@ -63,13 +63,13 @@
 			</div>
 			<br>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<input class="mdl-textfield__input" type="text" name="instagram" value="{{ Auth::user()->instagram }}">
-				<label class="mdl-textfield__label off-white" for="instagram">Instagram</label>
+				<input class="mdl-textfield__input" type="text" name="twitter" value="{{ Auth::user()->twitter }}">
+				<label class="mdl-textfield__label off-white" for="twitter">Twitter</label>
 			</div>
 			<br>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<input class="mdl-textfield__input" type="text" name="twitter" value="{{ Auth::user()->twitter }}">
-				<label class="mdl-textfield__label off-white" for="twitter">Twitter</label>
+				<input class="mdl-textfield__input" type="text" name="instagram" value="{{ Auth::user()->instagram }}">
+				<label class="mdl-textfield__label off-white" for="instagram">Instagram</label>
 			</div>
 			<div class="mdl-grid demo-content pl0" style ="padding-bottom: 30px">
 		<input type="submit" value="Save" class="mdl-button bg-gold mdl-shadow--2dp" style = "font-family: 'Montserrat'">
