@@ -82,7 +82,7 @@ function getData(start, end){
       let reactions = filterForReactions(value);
       let comments = filterForComments(value);
       let shares = filterForShares(value);
-      drawMainChart(allData);
+      drawMainChart(allData, value);
       drawSubChartOne(reactions);
       drawSubChartTwo(comments);
       drawSubChartThree(shares);
@@ -149,8 +149,15 @@ google.charts.setOnLoadCallback(() => {
   getData(startDate, endDate);
 });
 
-function drawMainChart(chartData) {
+function drawMainChart(chartData, allData) {
       var data = new google.visualization.DataTable();
+      let urlArray = allData.map(post => {
+        let date = new Date(post.time);
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        return [post.url]
+      });
+      urlArray.reverse();
       data.addColumn('string', 'Posts');
       data.addColumn('number', 'Reactions');
       data.addColumn('number', 'Comments');
@@ -191,6 +198,15 @@ function drawMainChart(chartData) {
 
       var chart = new google.visualization.LineChart(mainChart);
       chart.draw(data, options);
+      // a click handler which grabs some values then redirects the page
+      google.visualization.events.addListener(chart, 'select', function() {
+        // grab a few details before redirecting
+        var selection = chart.getSelection();
+        var row = selection[0].row;
+        var url = urlArray[row];
+        location.href = url;
+      });
+
 }
 
 function drawSubChartOne(chartData) {
