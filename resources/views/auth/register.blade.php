@@ -62,7 +62,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary bg-gold bn off-white">
+                                <button value="Register" type="submit" class="btn btn-primary bg-gold bn off-white">
                                     Register
                                 </button>
                             </div>
