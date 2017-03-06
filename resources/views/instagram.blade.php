@@ -32,9 +32,6 @@ Instagram Updates ({{ Auth::user()->instagram }})
 
 	<div class="sub-chart-two flex-auto bg-darker-grey shadow-2 br2 black ma3 w-25 h1">
 	</div>
-
-	<div class="sub-chart-three flex-auto bg-darker-grey shadow-2 br2 black ma3 w-25 h1">
-	</div>
 </main>
 
 @stop
