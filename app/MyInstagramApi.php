@@ -88,9 +88,9 @@ class MyInstagramApi
                         }
                         $data_to_add->url = $post->link;
                         $data_to_add->likes = $post->likes->count;
-                        $date = new \DateTime();
-                        $date->setTimestamp($post->created_time);
-                        $data_to_add->time = $date->getTimestamp();
+                        $simple_date = \date('Y-m-d\TH:i:s\Z', $post->created_time);
+                        $date = new \DateTime($simple_date);
+                        $data_to_add->time = $simple_date;
                         if ($date < $until_date){
                             break;
                         } else {
