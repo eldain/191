@@ -116,7 +116,7 @@ function filterforURLS(data){
 // Get the data
 function getData(start, end){
   startChartLoader();
-  let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}`
+  let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}&fbApiKey=${fbApiKey}&fbApiSecret=${fbApiSecret}`
   return fetch(myURL)
     .then(resp => {
       if(resp.ok){
@@ -206,8 +206,10 @@ function drawMainChart(chartData, urls) {
         // grab a few details before redirecting
         var selection = chart.getSelection();
         var row = selection[0].row;
-        var url = urls[row];
-        location.href = url;
+        if (row != null) {
+          var url = urls[row];
+          location.href = url;
+        }
       });
 }
 function drawSubChartOne(chartData) {

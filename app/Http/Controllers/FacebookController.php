@@ -12,6 +12,7 @@ class FacebookController extends Controller
      * Get Facebook reactions per post.
      * Example url: /fbGetFeedDateRange?user={username}
      *              &since={unicodedate}&until={unicodedate}
+     *              &fbApiKey={fbApiKey}&fbApiSecret={fbApiSecret}
      * @return Response
      */
     public function getFeedDateRange(Request $request)
@@ -24,7 +25,9 @@ class FacebookController extends Controller
         } else {
             $since = $request->input('since');
             $until = $request->input('until');
-            $fb = new MyFacebookApi();
+            $fbApiKey = $request->input('fbApiKey', 'not_logged_in');
+            $fbApiSecret = $request->input('fbApiSecret', 'not_logged_in');
+            $fb = new MyFacebookApi($fbApiKey, $fbApiSecret);
             return $fb->getFeedDataInDateRange($user, $since, $until);
         }
   
@@ -33,6 +36,7 @@ class FacebookController extends Controller
     /**
      * Get number of likes on Facebook Page.
      * Example url: /fbPageLikeCount?user={username}
+     *              &fbApiKey={fbApiKey}&fbApiSecret={fbApiSecret}
      * @return Response
      */
     public function getPageLikeCount(Request $request)
@@ -45,7 +49,7 @@ class FacebookController extends Controller
         } else {
             $fbApiKey = $request->input('fbApiKey', 'not_logged_in');
             $fbApiSecret = $request->input('fbApiSecret', 'not_logged_in');
-            $fb = new MyFacebookApi();
+            $fb = new MyFacebookApi($fbApiKey, $fbApiSecret);
             return $fb->getPageLikeCount($user, $fbApiKey, $fbApiSecret);
         }
     }

@@ -42,8 +42,8 @@ class UserController extends Controller
         // Facebook
         $user->facebook = $request->input('facebook');
         try{
-            $fb = new MyFacebookApi();
-            $fb->getPageLikeCount($user->facebook, $user->fb_api_key, $user->fb_api_secret);
+            $fb = new MyFacebookApi($user->fb_api_key, $user->fb_api_secret);
+            $fb->getPageLikeCount($user->facebook);
         } catch (\Exception $e) {
             $request->session()->flash('alert-error', 'Facebook Page Name: ' . $user->facebook 
                 . ' does exists. Changes not saved.');

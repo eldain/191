@@ -5,10 +5,14 @@ namespace App;
 
 class MyFacebookApi 
 {
-    private $appid = '1675423156013517';
-    private $appsecret = 'e336cc48fe592916c5968024714d7a89';
+    private $appid; // Luke's = 1675423156013517
+    private $appsecret; // Luke's = e336cc48fe592916c5968024714d7a89
     private $FbGraphHost = 'https://graph.facebook.com/';
 
+    function __construct($appid, $appsecret) {
+        $this->appid = $appid;
+        $this->appsecret = $appsecret;
+    }
 
     /**
      * Get the number of likes on a Facebook page given the page ID.
@@ -18,11 +22,11 @@ class MyFacebookApi
      *
      * @return String EX: 100
      */
-    public function getPageLikeCount($pageId, $appid, $appsecret)
+    public function getPageLikeCount($pageId)
     {
         //Construct a Facebook URL
         $json_url = $this->FbGraphHost . $pageId . '/?fields=fan_count&access_token=' 
-        . $appid.'|'.$appsecret;
+        . $this->appid . '|' . $this->appsecret;
 
         $ch = curl_init($json_url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

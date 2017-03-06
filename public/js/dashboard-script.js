@@ -189,7 +189,7 @@ function getIGTotalPosts(data){
 // Get the Facebook data
 function getFBData(start, end){
   startFBLoader();
-  let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}`
+  let myURL = `/fbGetFeedDateRange?user=${userFB}&since=${start}&until=${end}&fbApiKey=${fbApiKey}&fbApiSecret=${fbApiSecret}`
   return fetch(myURL)
     .then(resp => {
       if(resp.ok){
