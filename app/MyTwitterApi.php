@@ -69,6 +69,7 @@ class MyTwitterApi
             } else {
                 foreach ($tweets as $post){
                     $data_to_add = new \stdClass();
+                    $data_to_add->url = 'https://twitter.com/Gigasavvy/status/' . $post->id_str;
                     $data_to_add->text = $post->text;
                     $data_to_add->created_at = $post->created_at;
                     $data_to_add->favorite_count = $post->favorite_count;

@@ -78,7 +78,6 @@ function getData(start, end){
       throw new Error('Network response was not ok.');
     })
     .then(value => {
-      console.log(value);
       let allData = filterForAll(value);
       let likes = filterForLikes(value);
       let comments = filterForComments(value);
