@@ -69,7 +69,7 @@ function endChartLoader(){
 
 function getData(start, end){
   startChartLoader();
-  let myURL = `/inGetRecentPosts?user=${userInstagram}&since=${start}&until=2-2-2017`
+  let myURL = `/inGetRecentPosts?user=${userInstagram}&until=${start}`
   return fetch(myURL)
     .then(resp => {
       if(resp.ok){
@@ -81,7 +81,8 @@ function getData(start, end){
       let allData = filterForAll(value);
       let likes = filterForLikes(value);
       let comments = filterForComments(value);
-      drawMainChart(allData);
+      let urls = filterforURLS(value);
+      drawMainChart(allData, urls);
       drawSubChartOne(likes);
       drawSubChartTwo(comments);
       endChartLoader();
@@ -121,6 +122,13 @@ function filterForAll(data){
   return allArray.reverse();
 }
 
+function filterforURLS(data){
+  let urlArray = data.map(post => {
+    return post.url
+  });
+  return urlArray.reverse();
+}
+
 
 google.charts.load('current', {packages: ['corechart', 'line']});
 google.charts.setOnLoadCallback(() => {
@@ -129,7 +137,7 @@ google.charts.setOnLoadCallback(() => {
   getData(startDate, endDate);
 });
 
-function drawMainChart(chartData) {
+function drawMainChart(chartData, urls) {
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Posts');
       data.addColumn('number', 'Comments');
@@ -170,6 +178,16 @@ function drawMainChart(chartData) {
 
       var chart = new google.visualization.LineChart(mainChart);
       chart.draw(data, options);
+      // a click handler which grabs some values then redirects the page
+      google.visualization.events.addListener(chart, 'select', function() {
+        // grab a few details before redirecting
+        var selection = chart.getSelection();
+        var row = selection[0].row;
+        if (row != null) {
+          var url = urls[row];
+          location.href = url;
+        }
+      });
 }
 
 function drawSubChartOne(chartData) {

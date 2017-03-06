@@ -86,6 +86,7 @@ class MyInstagramApi
                         } else {
                             $data_to_add->text = "";
                         }
+                        $data_to_add->url = $post->link;
                         $data_to_add->likes = $post->likes->count;
                         $date = new \DateTime();
                         $date->setTimestamp($post->created_time);
