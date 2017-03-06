@@ -45,19 +45,19 @@ class UserController extends Controller
             $fb = new MyFacebookApi($user->fb_api_key, $user->fb_api_secret);
             $fb->getPageLikeCount($user->facebook);
         } catch (\Exception $e) {
-            $request->session()->flash('alert-error', 'Facebook Page Name: ' . $user->facebook 
-                . ' does exists. Changes not saved.');
+            $request->session()->flash('alert-error', 'Facebook Page Name: ' . $user->facebook
+                . ' doesn\'t exist. Changes not saved.');
             return redirect('settings');
         }
 
-        // Instagram 
+        // Instagram
         $user->instagram = $request->input('instagram');
         try{
             $instagram = new MyInstagramApi();
             $instagram->getInstaIdByUsername($user->instagram);
         } catch (\Exception $e) {
             $request->session()->flash('alert-error', 'Instagram Username: ' . $user->instagram
-                . ' does exists. Changes not saved.');
+                . ' doesn\'t exist. Changes not saved.');
             return redirect('settings');
         }
 
@@ -67,8 +67,8 @@ class UserController extends Controller
             $twitter = new MyTwitterApi();
             $twitter->getLastTweet($user->twitter);
         } catch (\Exception $e) {
-            $request->session()->flash('alert-error', 'Twitter Handle: ' . $user->twitter 
-                . ' does exists. Changes not saved.');
+            $request->session()->flash('alert-error', 'Twitter Handle: ' . $user->twitter
+                . ' doesn\'t exist. Changes not saved.');
             return redirect('settings');
         }
         $user->save();
