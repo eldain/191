@@ -67,9 +67,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'facebook' => 'null',
-            'twitter' => 'null',
-            'instagram' => 'null',
+            'facebook' => 'Gigasavvy',
+            'twitter' => 'Gigasavvy',
+            'instagram' => 'fahrenheit4hunnid',
             'fb_api_key' => '1675423156013517',
             'fb_api_secret' => 'e336cc48fe592916c5968024714d7a89',
         ]);

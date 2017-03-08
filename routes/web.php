@@ -36,12 +36,8 @@ Route::post('updateUserGeneral', 'UserController@updateGeneralSettings');
 Route::post('updateSocialSettings', 'UserController@updateSocialSettings');
 Route::post('updateAPISettings', 'UserController@updateAPISettings');
 
-/* (lukeraus) test URL below */
-Route::get('/test', function () {
-	$results = DB::select('select * from users', array(1));
-    return $results;
-})->middleware('auth');
 
+// Page Routes
 Route::get('/dashboard', function() {
   return View('dashboard');
 })->middleware('auth');
