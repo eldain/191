@@ -2,7 +2,7 @@
 @section('title', 'Settings')
 @section('dashboard-title', 'Settings')
 @section('scripts')
-	<script src="/js/settings.js" charset="utf-8" async></script>
+	<script src="/js/settings.js" charset="utf-8" defer></script>
 @stop
 @section('dashboard-body')
 

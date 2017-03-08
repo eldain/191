@@ -2,7 +2,7 @@
 @section('title', 'Twitter Updates')
 
 @section('scripts')
-	<script src="/js/twitter-script.js" charset="utf-8" async></script>
+	<script src="/js/twitter-script.js" charset="utf-8" defer></script>
 @stop
 
 @section('dashboard-title')

@@ -2,7 +2,7 @@
 @section('title', 'Instagram Updates')
 
 @section('scripts')
-	<script src="/js/instagram-script.js" charset="utf-8" async></script>
+	<script src="/js/instagram-script.js" charset="utf-8" defer></script>
 @stop
 
 @section('dashboard-title')
@@ -17,7 +17,7 @@ Instagram Updates ({{ Auth::user()->instagram }})
 			 <circle class="path" fill="none" stroke="#AB9657" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
 		</svg>
 	</div>
-	
+
 	<div class="button-holder flex z-1 absolute w-30 justify-between">
 		<button class="flex-auto f5 mw4 pv1 bn br2 bg-black bg-gold white" data-days="30" type="button" name="30day">30 Days</button>
 		<button class="flex-auto f5 mw4 pv1 bn br2 bg-black white" data-days="60" type="button" name="60days">60 Days</button>
