@@ -215,7 +215,7 @@ function drawMainChart(chartData, urls) {
 function drawSubChartOne(chartData) {
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Posts');
-  data.addColumn('number', 'Likes');
+  data.addColumn('number', 'Reactions');
 
   // addRows format [[a,b],[c,d],...]
   data.addRows(chartData);
@@ -256,7 +256,7 @@ function drawSubChartOne(chartData) {
 function drawSubChartTwo(chartData) {
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Posts');
-  data.addColumn('number', 'Likes');
+  data.addColumn('number', 'Comments');
 
   // addRows format [[a,b],[c,d],...]
   data.addRows(chartData);
@@ -297,7 +297,7 @@ function drawSubChartTwo(chartData) {
 function drawSubChartThree(chartData) {
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Posts');
-  data.addColumn('number', 'Likes');
+  data.addColumn('number', 'Shares');
 
   // addRows format [[a,b],[c,d],...]
   data.addRows(chartData);
@@ -343,6 +343,7 @@ dayButtons.forEach(button => button.addEventListener('click', (e) => {
   let startDate = getStartDate(e.target.dataset.days);
   let endDate = getTodaysDate();
   getData(startDate, endDate);
+  dayRangeDefault = e.target.dataset.days;
 }));
 
 // Repeat for "Realtime Data"
