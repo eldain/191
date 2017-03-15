@@ -188,7 +188,13 @@ function drawMainChart(chartData, urls) {
         var row = selection[0].row;
         if (row != null) {
           var url = urls[row];
-          location.href = url;
+          var win = window.open(url, '_blank');
+          if (win) {
+              //Browser has allowed it to be opened
+              win.focus();
+          } else {
+            location.href = url;
+          }
         }
       });
 }
