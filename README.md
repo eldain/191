@@ -37,7 +37,7 @@ The following JS files handle the API calls to the controllers, and updates the 
 
 ## API Keys
 
-Currently the API keys used for each socail media account are owned by Luke Raus and can be changed easily.
+Currently the API keys used for each social media account are owned by Luke Raus and can be changed easily.
 Instagram's access token is located in `/app/MyInstagramApi.php` as a private static variable ($access_token).
 Twittter's settings is located in `/app/MyTwitterApi.php` as a private static array ($settings). 
 	NOTE: the $twitterCountApi is a third party api key for an app called TwitterCount but was never used
