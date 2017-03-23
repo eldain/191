@@ -4,6 +4,9 @@
 ## Contributors
 Luke Raus
 Daniel McInnis
+Jasmine Nguyen
+Sania Bishnoi
+Xen Eldridge
 
 ## Installation
 1. Set up Laravel with Homestead (tutorial here: https://youtu.be/NcIPANwBghU)
