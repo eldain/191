@@ -54,7 +54,7 @@ But it will be supported in Safari 10.1.
 A work around could be found here:
 http://stackoverflow.com/questions/35830202/fetch-not-defined-in-safari-referenceerror-cant-find-variable-fetch
 
-But do to time constraints we were not able to implment this fix.
+But due to time constraints we were not able to implment this fix.
 
 ## Contact
 
