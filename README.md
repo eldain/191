@@ -23,8 +23,8 @@ parses the data, and then retuns the result as JSON strings:
 `/app/MyInstagramApi.php`
 `/app/MyTwitterApi.php`
 
-The following files are controlers that construct and call the My[social]Api.php classes.
-The doct string in each methods shows how the calls need to be constucted:   
+The following files are controllers that construct and call the My[social]Api.php classes.
+The doc string in each methods shows how the calls need to be constucted:   
 `/app/Http/Controllers/FacebookController.php`
 `/app/Http/Controllers/InstagramController.php`
 `/app/Http/Controllers/TwitterController.php`
@@ -35,6 +35,9 @@ The following JS files handle the API calls to the controllers, and updates the 
 `/public/js/instagram-script.js`
 `/public/js/twitter-script.js`
 
+User account information is captured in the head of `/resources/views/dashboard-template.blade.php` 
+and stored as Javascript varibles to be used in the Jasascript files listed above.
+
 ## API Keys
 
 Currently the API keys used for each social media account are owned by Luke Raus and can be changed easily.
@@ -43,7 +46,8 @@ Twittter's settings is located in `/app/MyTwitterApi.php` as a private static ar
 	NOTE: the $twitterCountApi is a third party api key for an app called TwitterCount but was never used
 
 Facebook's appid and appsecret are tied to each user and can be changed in `/database/seeds/UserTableSeeder.php`
-or in the advanced setting section of the web app.
+or in the advanced setting section of the web app. 
+A default key is also assigned on acccount creation in `/app/Http/Controllers/Auth/RegisterController.php` 
 This was made tied to the user so that it could be changed from within the app website.
 We did not have time to tie Instagrm's and Twitter's settings to the each user.
 
