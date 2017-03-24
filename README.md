@@ -18,7 +18,7 @@ Luke Raus, Daniel McInnis, Jasmine Nguyen, Sania Bishnoi, Xen Eldridge
 Most of the heavy lifting and social media API calls can be found in the /app directory
 
 The following files are php classes that take simple parameters, make the API call via curl,
-parses the data, and then retuns the reuslt as JSON strings:
+parses the data, and then retuns the result as JSON strings:
 `/app/MyFacebookApi.php`
 `/app/MyInstagramApi.php`
 `/app/MyTwitterApi.php`
@@ -49,8 +49,8 @@ We did not have time to tie Instagrm's and Twitter's settings to the each user.
 
 ## Known Issues
 
-It was found late in development that Safari 10 does not support the JS call fetch.  
-But it will be supported in Safari 10.1.  
+It was found late in development that Safari 10 does not support Javascript's ES6 fetch.  
+However, it will be supported in Safari 10.1.  
 A work around could be found here:
 http://stackoverflow.com/questions/35830202/fetch-not-defined-in-safari-referenceerror-cant-find-variable-fetch
 
